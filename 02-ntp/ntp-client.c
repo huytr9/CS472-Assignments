@@ -311,7 +311,6 @@ void demonstrate_epoch_conversion(void) {
  * These functions handle time format conversions between system time and NTP time.
  */
 
-//STUDENT TODO
 /*
  * Get current system time and convert to NTP timestamp format
  * 
@@ -335,13 +334,22 @@ void demonstrate_epoch_conversion(void) {
  * Use demonstrate_epoch_conversion() to verify your conversion logic
  */
 void get_current_ntp_time(ntp_timestamp_t *ntp_ts){
-    printf("get_current_ntp_time() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: Use gettimeofday(), convert epoch, scale microseconds
-    memset(ntp_ts, 0, sizeof(ntp_timestamp_t));
+    if (!ntp_ts) {
+        return;
+    }
+    // gives unix seconds and microseconds
+    struct timeval now;
+    if (gettimeofday(&now, NULL) < 0) {
+        perror("gettimeofday");
+        memset(ntp_ts, 0, sizeof(*ntp_ts));
+        return;
+    }
+    // add the epoch difference because ntp starts counting in 1900
+    ntp_ts->seconds = (uint32_t)(now.tv_sec + NTP_EPOCH_OFFSET);
+    // use 64 bits so the multiplication
+    ntp_ts->fraction = (uint32_t)((uint64_t)now.tv_usec * NTP_FRACTION_SCALE / USEC_INCREMENTS);
 }
 
-//STUDENT TODO
 /*
  * Convert NTP timestamp to human-readable string
  * 
@@ -367,13 +375,34 @@ void get_current_ntp_time(ntp_timestamp_t *ntp_ts){
  * If conversion fails, use snprintf to write "INVALID_TIME" to buffer
  */
 void ntp_time_to_string(const ntp_timestamp_t *ntp_ts, char *buffer, size_t buffer_size, int local) {
-    printf("ntp_time_to_string() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: Convert NTP to Unix time, use localtime/gmtime, format with snprintf
-    snprintf(buffer, buffer_size, "TO BE IMPLEMENTED");
+    if (!buffer || buffer_size == 0) {
+        return;
+    }
+    if (!ntp_ts) {
+        snprintf(buffer, buffer_size, "INVALID_TIME");
+        return;
+    }
+    // subtract the epoch difference before using the standard date functions
+    time_t seconds = (time_t)((int64_t)ntp_ts->seconds - (int64_t)NTP_EPOCH_OFFSET);
+    // turn the binary fraction into microseconds for the displayed time
+    unsigned int usec = (unsigned int)((uint64_t)ntp_ts->fraction *
+                                      USEC_INCREMENTS / NTP_FRACTION_SCALE);
+    struct tm *date;
+    if (local) {
+        date = localtime(&seconds);
+    } else {
+        date = gmtime(&seconds);
+    }
+    char date_buffer[20];
+    if (!date || strftime(date_buffer, sizeof(date_buffer),
+                         "%Y-%m-%d %H:%M:%S", date) == 0) {
+        snprintf(buffer, buffer_size, "INVALID_TIME");
+        return;
+    }
+    // pads the fraction with zeros so it always has six digits
+    snprintf(buffer, buffer_size, "%s.%06u", date_buffer, usec);
 }
 
-//STUDENT TODO
 /*
  * Convert NTP timestamp to double for mathematical operations
  * 
@@ -397,13 +426,13 @@ void ntp_time_to_string(const ntp_timestamp_t *ntp_ts, char *buffer, size_t buff
  * Use NTP_FRACTION_SCALE (2^32) constant for the division
  */
 double ntp_time_to_double(const ntp_timestamp_t* timestamp) {
-    printf("ntp_time_to_double() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: Convert both parts to double and add
-    return 0.0;
+    if (!timestamp) {
+        return 0.0;
+    }
+    // combine whole seconds and fractional seconds
+    return (double)timestamp->seconds + (double)timestamp->fraction / NTP_FRACTION_SCALE;
 }
 
-//STUDENT TODO
 /*
  * Print NTP timestamp with descriptive label
  * 
@@ -419,9 +448,13 @@ double ntp_time_to_double(const ntp_timestamp_t* timestamp) {
  * Output: "Transmit Time: 2025-09-15 13:36:14.541216 (Local Time)"
  */
 void print_ntp_time(const ntp_timestamp_t *ts, const char* label, int local){
-    printf("print_ntp_time() - TO BE IMPLEMENTED - %s\n", label);
-    // TODO: Implement this function
-    // Hint: Use ntp_time_to_string and printf
+    char buffer[TIME_BUFF_SIZE];
+    ntp_time_to_string(ts, buffer, sizeof(buffer), local);
+    if (local) {
+        printf("%s: %s (Local Time)\n", label, buffer);
+    } else {
+        printf("%s: %s (UTC)\n", label, buffer);
+    }
 }
 
 /*
@@ -430,7 +463,6 @@ void print_ntp_time(const ntp_timestamp_t *ts, const char* label, int local){
  * Network protocols require big-endian byte order regardless of host architecture.
  */
 
-//STUDENT TODO
 /*
  * Convert NTP timestamp from host to network byte order
  * 
@@ -449,12 +481,14 @@ void print_ntp_time(const ntp_timestamp_t *ts, const char* label, int local){
  * Network protocols require consistent byte order across different architectures
  */
 void ntp_ts_to_net(ntp_timestamp_t* timestamp){
-    printf("ntp_ts_to_net() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: Use htonl() on both seconds and fraction fields
+    if (!timestamp) {
+        return;
+    }
+    // each 32 bit half is converted before sending
+    timestamp->seconds = htonl(timestamp->seconds);
+    timestamp->fraction = htonl(timestamp->fraction);
 }
 
-//STUDENT TODO
 /*
  * Convert NTP timestamp from network to host byte order
  * 
@@ -473,12 +507,14 @@ void ntp_ts_to_net(ntp_timestamp_t* timestamp){
  * Host processing requires native byte order for correct arithmetic
  */
 void ntp_ts_to_host(ntp_timestamp_t* timestamp){
-    printf("ntp_ts_to_host() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: Use ntohl() on both seconds and fraction fields
+    if (!timestamp) {
+        return;
+    }
+    // restore the byte order before doing arithmetic
+    timestamp->seconds = ntohl(timestamp->seconds);
+    timestamp->fraction = ntohl(timestamp->fraction);
 }
 
-//STUDENT TODO
 /*
  * Convert entire NTP packet from host to network byte order
  * 
@@ -498,12 +534,19 @@ void ntp_ts_to_host(ntp_timestamp_t* timestamp){
  * CALL THIS: Before sending packet over network
  */
 void ntp_to_net(ntp_packet_t* packet){
-    printf("ntp_to_net() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: Convert 32-bit fields with htonl(), timestamps with ntp_ts_to_net()
+    if (!packet) {
+        return;
+    }
+    // convert multibyte fields only and the single byte fields stay hte same
+    packet->root_delay = htonl(packet->root_delay);
+    packet->root_dispersion = htonl(packet->root_dispersion);
+    packet->reference_id = htonl(packet->reference_id);
+    ntp_ts_to_net(&packet->ref_time);
+    ntp_ts_to_net(&packet->orig_time);
+    ntp_ts_to_net(&packet->recv_time);
+    ntp_ts_to_net(&packet->xmit_time);
 }
 
-//STUDENT TODO
 /*
  * Convert entire NTP packet from network to host byte order
  * 
@@ -522,9 +565,17 @@ void ntp_to_net(ntp_packet_t* packet){
  * CALL THIS: After receiving packet from network
  */
 void ntp_to_host(ntp_packet_t* packet){
-    printf("ntp_to_host() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: Convert 32-bit fields with ntohl(), timestamps with ntp_ts_to_host()
+    if (!packet) {
+        return;
+    }
+    // convert the received fields back before reading ther values
+    packet->root_delay = ntohl(packet->root_delay);
+    packet->root_dispersion = ntohl(packet->root_dispersion);
+    packet->reference_id = ntohl(packet->reference_id);
+    ntp_ts_to_host(&packet->ref_time);
+    ntp_ts_to_host(&packet->orig_time);
+    ntp_ts_to_host(&packet->recv_time);
+    ntp_ts_to_host(&packet->xmit_time);
 }
 
 /*
@@ -532,7 +583,6 @@ void ntp_to_host(ntp_packet_t* packet){
  * These functions build NTP protocol packets according to RFC specifications.
  */
 
-//STUDENT TODO
 /*
  * Build NTP client request packet
  * 
@@ -568,17 +618,18 @@ void ntp_to_host(ntp_packet_t* packet){
  * RC_OK (0) on success, RC_BAD_PACKET (-1) if packet is NULL
  */
 int build_ntp_request(ntp_packet_t* packet) {
-    printf("build_ntp_request() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: memset to zero, set bit fields with macro, set basic fields, set transmit time
     if (!packet) {
         return RC_BAD_PACKET;
     }
-    memset(packet, 0, sizeof(ntp_packet_t));
-    
-    // After you implement this, uncomment the line below to debug:
-    // debug_print_bit_fields(packet);
-    
+    // start with empty fields including timestamps
+    memset(packet, 0, sizeof(*packet));
+    // pack the sync status and version and client mode into the first byte
+    SET_NTP_LI_VN_MODE(packet, NTP_LI_UNSYNC, NTP_VERSION, NTP_MODE_CLIENT);
+    packet->stratum = 0;
+    packet->poll = 6;
+    packet->precision = -20;
+    // this is going to trasmit timestamp is t1 in the four timestamp calculation
+    get_current_ntp_time(&packet->xmit_time);
     return RC_OK;
 }
 
@@ -587,7 +638,6 @@ int build_ntp_request(ntp_packet_t* packet) {
  * These functions parse NTP responses and perform time calculations.
  */
 
-//STUDENT TODO
 /*
  * Decode NTP reference_id field based on stratum level
  * 
@@ -622,14 +672,30 @@ int build_ntp_request(ntp_packet_t* packet) {
  * RC_OK (0) on success, RC_BUFF_TOO_SMALL (-2) if buffer too small
  */
 int decode_reference_id(uint8_t stratum, uint32_t ref_id, char *buff, int buff_sz){
-    printf("decode_reference_id() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: Check buffer sizes, handle ref_id==0, stratum>=2 (IP), stratum<2 (ASCII)
-    snprintf(buff, buff_sz, "TO BE IMPLEMENTED");
+    int needed = 5;  // four characters plus the string term
+    if (ref_id != 0 && stratum >= 2) {
+        needed = INET_ADDRSTRLEN;
+    }
+    if (!buff || buff_sz < needed) {
+        return RC_BUFF_TOO_SMALL;
+    }
+    if (ref_id == 0) {
+        strcpy(buff, "NONE");
+    } else {
+        // restore the byte order by the address and text conversion
+        uint32_t network_id = htonl(ref_id);
+        if (stratum >= 2) {
+            if (!inet_ntop(AF_INET, &network_id, buff, buff_sz)) {
+                return RC_BAD_PACKET;
+            }
+        } else {
+            memcpy(buff, &network_id, 4);
+            buff[4] = '\0';
+        }
+    }
     return RC_OK;
 }
 
-//STUDENT TODO
 /*
  * Calculate NTP time offset and delay using standard algorithm
  * 
@@ -700,21 +766,44 @@ int calculate_ntp_offset(const ntp_packet_t* request,
                         const ntp_packet_t* response,
                         const ntp_timestamp_t* recv_time, 
                         ntp_result_t* result) {
-    printf("calculate_ntp_offset() - TO BE IMPLEMENTED\n");
-    // TODO: Implement this function
-    // Hint: Extract T1-T4 timestamps, apply NTP formulas, calculate dispersion
-    if (!request || !response || !result) {
-        return -1;
+    if (!request || !response || !recv_time || !result) {
+        return RC_BAD_PACKET;
     }
-    
-    // Initialize result with dummy values
-    result->delay = 0.0;
-    result->offset = 0.0;
-    result->final_dispersion = 0.0;
-    memset(&result->server_time, 0, sizeof(ntp_timestamp_t));
-    memset(&result->client_time, 0, sizeof(ntp_timestamp_t));
-    
-    return 0;
+    // check that the reply is from a same time server
+    if (GET_NTP_MODE(response) != NTP_MODE_SERVER ||
+        GET_NTP_LI(response) == NTP_LI_UNSYNC ||
+        response->stratum == 0 || response->stratum > 15) {
+        return RC_BAD_PACKET;
+    }
+    // the server echoes the timestamp to check the request
+    if (response->orig_time.seconds != request->xmit_time.seconds ||
+        response->orig_time.fraction != request->xmit_time.fraction) {
+        return RC_BAD_PACKET;
+    }
+    // both server timestamps are needed for the calculation.
+    if ((response->recv_time.seconds == 0 && response->recv_time.fraction == 0) ||
+        (response->xmit_time.seconds == 0 && response->xmit_time.fraction == 0)) {
+        return RC_BAD_PACKET;
+    }
+    // t1 and t4 are client times; t2 and t3 are server times.
+    double t1 = ntp_time_to_double(&request->xmit_time);
+    double t2 = ntp_time_to_double(&response->recv_time);
+    double t3 = ntp_time_to_double(&response->xmit_time);
+    double t4 = ntp_time_to_double(recv_time);
+    // remove the time spent at the server from the total round trip.
+    result->delay = (t4 - t1) - (t3 - t2);
+    // estimate the clock difference, assuming equal travel time both ways.
+    result->offset = ((t2 - t1) + (t3 - t4)) / 2.0;
+
+    // root delay is signed q16.16; dispersion is unsigned q16.16.
+    double root_delay = (double)(int32_t)response->root_delay / 65536.0;
+    double dispersion = (double)response->root_dispersion / 65536.0;
+    // combine the server uncertainty with half of each network delay.
+    result->final_dispersion = dispersion + root_delay / 2.0 + result->delay / 2.0;
+    // save the original timestamps for the results display.
+    result->server_time = response->xmit_time;
+    result->client_time = *recv_time;
+    return RC_OK;
 }
 
 /*
@@ -722,7 +811,6 @@ int calculate_ntp_offset(const ntp_packet_t* request,
  * These functions format and display NTP information for the user.
  */
 
-//STUDENT TODO
 /*
  * Print detailed NTP packet information in human-readable format
  * 
@@ -758,12 +846,37 @@ int calculate_ntp_offset(const ntp_packet_t* request,
  * Transmit Time (T3): 2025-09-15 09:09:34.348244 (Local Time)
  */
 void print_ntp_packet_info(const ntp_packet_t* packet, const char* label, int packet_type) {
-    printf("print_ntp_packet_info() - TO BE IMPLEMENTED - %s Packet\n", label);
-    // TODO: Implement this function
-    // Hint: Use printf for fields, GET_NTP_* macros for bit fields, decode_reference_id, print_ntp_time
+    if (!packet) {
+        return;
+    }
+    // leave enough room for the longest ipv4 address and its null byte.
+    char reference[INET_ADDRSTRLEN];
+    if (decode_reference_id(packet->stratum, packet->reference_id,
+                            reference, sizeof(reference)) != RC_OK) {
+        strcpy(reference, "INVALID");
+    }
+    printf("--- %s Packet ---\n", label);
+    printf("Leap Indicator: %u\n", GET_NTP_LI(packet));
+    printf("Version: %u\n", GET_NTP_VN(packet));
+    printf("Mode: %u\n", GET_NTP_MODE(packet));
+    printf("Stratum: %u\n", packet->stratum);
+    printf("Poll: %u\n", packet->poll);
+    printf("Precision: %d\n", packet->precision);
+    printf("Reference ID: [0x%08X] %s\n", packet->reference_id, reference);
+    printf("Root Delay: %.6f seconds\n",
+           (double)(int32_t)packet->root_delay / 65536.0);
+    printf("Root Dispersion: %.6f seconds\n",
+           (double)packet->root_dispersion / 65536.0);
+    print_ntp_time(&packet->ref_time, "Reference Time", LOCAL_TIME);
+    print_ntp_time(&packet->orig_time, "Originate Time (T1)", LOCAL_TIME);
+    print_ntp_time(&packet->recv_time, "Receive Time (T2)", LOCAL_TIME);
+    if (packet_type == IS_REQUEST) {
+        print_ntp_time(&packet->xmit_time, "Transmit Time (T1)", LOCAL_TIME);
+    } else {
+        print_ntp_time(&packet->xmit_time, "Transmit Time (T3)", LOCAL_TIME);
+    }
 }
 
-//STUDENT TODO
 /*
  * Print NTP synchronization results with user-friendly analysis
  * 
@@ -788,11 +901,27 @@ Your clock is running BEHIND by 81.06ms
 Your estimated time error will be +/- 34.92ms
  */
 void print_ntp_results(const ntp_result_t* result) {
-    /* Here are some local buffers that you should use*/
+    if (!result) {
+        return;
+    }
     char svr_time_buff[TIME_BUFF_SIZE];
     char cli_time_buff[TIME_BUFF_SIZE];
-
-    printf("print_ntp_results() - TO BE IMPLEMENTED\n");
-    //Hint:  Note that you really dont have to do much here other than
-    //       Print out data that is passed in teh result arguement
+    ntp_time_to_string(&result->server_time, svr_time_buff, sizeof(svr_time_buff), LOCAL_TIME);
+    ntp_time_to_string(&result->client_time, cli_time_buff, sizeof(cli_time_buff), LOCAL_TIME);
+    printf("Server Time: %s (Local Time)\n", svr_time_buff);
+    printf("Local Time:  %s (Local Time)\n", cli_time_buff);
+    // calculation use seconds multiply by 1000 to also show milliseconds
+    printf("Round Trip Delay: %.6f seconds (%.3f ms)\n", result->delay, result->delay * 1000.0);
+    printf("Time Offset: %+.6f seconds (%+.3f ms)\n", result->offset, result->offset * 1000.0);
+    printf("Final Dispersion: %.6f seconds (%.3f ms)\n",
+           result->final_dispersion, result->final_dispersion * 1000.0);
+    // a positive offset means the server clock is ahead of our clock
+    if (result->offset > 0) {
+        printf("Your clock is running BEHIND by %.3f ms\n", result->offset * 1000.0);
+    } else if (result->offset < 0) {
+        printf("Your clock is running AHEAD by %.3f ms\n", -result->offset * 1000.0);
+    } else {
+        printf("No clock offset measured.\n");
+    }
+    printf("Estimated time error: +/- %.3f ms\n", result->final_dispersion * 1000.0);
 }
