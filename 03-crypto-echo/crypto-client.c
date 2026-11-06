@@ -172,6 +172,7 @@
 #include "crypto-client.h"
 #include "crypto-lib.h"
 #include "protocol.h"
+#include "crypto-io.h"
 
 
 /* =============================================================================
@@ -187,12 +188,150 @@
  *   addr - Server IP address (e.g., "127.0.0.1")
  *   port - Server port number (e.g., 1234)
  */
+extern int client_sockfd;
+
+// leave room for the five characters the server adds to the reply.
+static int build_request(const msg_cmd_t *command, crypto_msg_t *request,
+    crypto_key_t session_key) {
+  request->header.msg_type = command->cmd_id;
+  request->header.direction = DIR_REQUEST;
+  request->header.payload_len = 0;
+  if (command->cmd_id != MSG_DATA && command->cmd_id != MSG_ENCRYPTED_DATA) {
+    return 0;
+  }
+  size_t length = strlen(command->cmd_line);
+  if (length > MAX_MSG_DATA_SIZE - 5) {
+    printf("[ERROR] Message is too long. Maximum is %zu characters.\n",
+           (size_t)MAX_MSG_DATA_SIZE - 5);
+    return -1;
+  }
+  if (command->cmd_id == MSG_ENCRYPTED_DATA) {
+    if (session_key == NULL_CRYPTO_KEY) {
+      printf("[ERROR] Use # to exchange keys before sending encrypted data.\n");
+      return -1;
+    }
+    // check the allowed characters before passing text to the library.
+    if (strspn(command->cmd_line,
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ,") != length) {
+      printf("[ERROR] Encrypted text can only use letters, digits, spaces, and commas.\n");
+      return -1;
+    }
+    if (length > 0 && encrypt_string(session_key, request->payload,
+        (uint8_t *)command->cmd_line, length) < 0) {
+      printf("[ERROR] Could not encrypt message.\n");
+      return -1;
+    }
+  } else {
+    memcpy(request->payload, command->cmd_line, length);
+  }
+  request->header.payload_len = (uint16_t)length;
+  request->payload[length] = '\0';
+  return 0;
+}
+
+static int client_loop(int fd) {
+  crypto_msg_t *request = calloc(1, BUFFER_SIZE + 1);
+  crypto_msg_t *response = calloc(1, BUFFER_SIZE + 1);
+  if (!request || !response) {
+    free(request);
+    free(response);
+    fprintf(stderr, "Could not allocate message buffers.\n");
+    return -1;
+  }
+  crypto_key_t session_key = NULL_CRYPTO_KEY;
+  char input[MAX_MSG_DATA_SIZE + 1];
+  int result = 0;
+  printf("Type ? for help, - to leave, or = to stop the server.\n");
+  while (1) {
+    msg_cmd_t command;
+    int status = get_command(input, sizeof(input), &command);
+    // stop on end of input instead of repeatedly asking for another line.
+    if (status != CMD_EXECUTE) {
+      if (feof(stdin) || ferror(stdin)) break;
+      continue;
+    }
+    if (strlen(input) == sizeof(input) - 1) {
+      int ch;
+      while ((ch = getchar()) != '\n' && ch != EOF) {}
+      printf("[ERROR] Input line is too long.\n");
+      continue;
+    }
+    if (build_request(&command, request, session_key) < 0) continue;
+    show_message(request, session_key, CLIENT_MODE);
+    if (send_message(fd, request) < 0) {
+      perror("send request");
+      result = -1;
+      break;
+    }
+    // stop commands have no reply, so do not wait for one.
+    if (command.cmd_id == MSG_CMD_CLIENT_STOP ||
+        command.cmd_id == MSG_CMD_SERVER_STOP) break;
+    status = receive_message(fd, response);
+    if (status != 1) {
+      if (status == 0) fprintf(stderr, "Server disconnected.\n");
+      else perror("receive response");
+      result = -1;
+      break;
+    }
+    if (response->header.direction != DIR_RESPONSE ||
+        (response->header.msg_type != command.cmd_id &&
+         response->header.msg_type != MSG_ERROR)) {
+      fprintf(stderr, "Unexpected response header.\n");
+      result = -1;
+      break;
+    }
+    if (response->header.msg_type == MSG_KEY_EXCHANGE) {
+      if (response->header.payload_len != sizeof(session_key)) {
+        fprintf(stderr, "Invalid key exchange response.\n");
+        result = -1;
+        break;
+      }
+      crypto_key_t received_key;
+      memcpy(&received_key, response->payload, sizeof(received_key));
+      uint8_t encryption_key = GET_ENCRYPTION_KEY(received_key);
+      uint8_t decryption_key = GET_DECRYPTION_KEY(received_key);
+      if (encryption_key == 0 || encryption_key >= 64 || !(encryption_key & 1) ||
+          decryption_key == 0 || decryption_key >= 64 || !(decryption_key & 1)) {
+        fprintf(stderr, "Invalid session key.\n");
+        result = -1;
+        break;
+      }
+      session_key = received_key;
+    }
+    // the provided display function also decrypts encrypted replies.
+    show_message(response, session_key, CLIENT_MODE);
+  }
+  free(request);
+  free(response);
+  return result;
+}
+
 void start_client(const char* addr, int port) {
-    printf("Student TODO: Implement start_client()\n");
-    printf("  - Create TCP socket\n");
-    printf("  - Connect to %s:%d\n", addr, port);
-    printf("  - Implement communication loop\n");
-    printf("  - Close socket when done\n");
+  struct sockaddr_in server = {0};
+  server.sin_family = AF_INET;
+  server.sin_port = htons((uint16_t)port);
+  if (inet_pton(AF_INET, addr, &server.sin_addr) != 1) {
+    fprintf(stderr, "Invalid server address: %s\n", addr);
+    exit(EXIT_FAILURE);
+  }
+  client_sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  if (client_sockfd < 0) {
+    perror("socket");
+    exit(EXIT_FAILURE);
+  }
+  if (prepare_socket(client_sockfd) < 0 ||
+      connect(client_sockfd, (struct sockaddr *)&server, sizeof(server)) < 0) {
+    perror("connect");
+    close(client_sockfd);
+    client_sockfd = -1;
+    exit(EXIT_FAILURE);
+  }
+  printf("Connected to server %s:%d\n", addr, port);
+  int result = client_loop(client_sockfd);
+  close(client_sockfd);
+  client_sockfd = -1;
+  printf("Client disconnected.\n");
+  if (result < 0) exit(EXIT_FAILURE);
 }
 
 

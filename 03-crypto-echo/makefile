@@ -3,6 +3,10 @@
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -gdwarf-4 -O0  -g
+# keep the provided crypto library compatible with macos system headers.
+ifeq ($(shell uname -s),Darwin)
+CFLAGS += -include crypto-platform.h
+endif
 TARGET = crypto-echo
 SOURCE = crypto-echo.c crypto-lib.c crypto-client.c crypto-server.c
 
@@ -11,7 +15,7 @@ SOURCE = crypto-echo.c crypto-lib.c crypto-client.c crypto-server.c
 all: $(TARGET) $(HELPER)
 
 # Build the program
-$(TARGET): $(SOURCE)
+$(TARGET): $(SOURCE) $(wildcard *.h)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCE)
 
 

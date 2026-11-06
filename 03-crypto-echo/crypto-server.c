@@ -226,6 +226,7 @@
 #include "crypto-server.h"
 #include "crypto-lib.h"
 #include "protocol.h"
+#include "crypto-io.h"
 
 
 /* =============================================================================
@@ -245,11 +246,175 @@
  * 
  * NOTE: If addr is "0.0.0.0", use INADDR_ANY instead of inet_pton()
  */
+extern int server_sockfd;
+extern int client_sockfd;
+
+static int error_response(crypto_msg_t *response, const char *text) {
+  response->header.msg_type = MSG_ERROR;
+  response->header.direction = DIR_RESPONSE;
+  response->header.payload_len = (uint16_t)strlen(text);
+  memcpy(response->payload, text, response->header.payload_len + 1);
+  return 0;
+}
+
+static int build_response(crypto_msg_t *request, crypto_msg_t *response,
+                          crypto_key_t *server_key, crypto_key_t *client_key) {
+  response->header.msg_type = request->header.msg_type;
+  response->header.direction = DIR_RESPONSE;
+  response->header.payload_len = 0;
+  if (request->header.direction != DIR_REQUEST) {
+    return error_response(response, "Expected a request.");
+  }
+  switch (request->header.msg_type) {
+    case MSG_CMD_CLIENT_STOP:
+    case MSG_CMD_SERVER_STOP:
+      if (request->header.payload_len != 0) {
+        return error_response(response, "Stop commands must have an empty payload.");
+      }
+      if (request->header.msg_type == MSG_CMD_SERVER_STOP) return RC_CLIENT_REQ_SERVER_EXIT;
+      return RC_CLIENT_EXITED;
+    case MSG_KEY_EXCHANGE:
+      if (request->header.payload_len != 0) {
+        return error_response(response, "Key requests must have an empty payload.");
+      }
+      if (gen_key_pair(server_key, client_key) != RC_OK) {
+        return error_response(response, "Could not generate keys.");
+      }
+      // keep the server key here and send only the client's key.
+      memcpy(response->payload, client_key, sizeof(*client_key));
+      response->header.payload_len = sizeof(*client_key);
+      return 0;
+    case MSG_DATA:
+    case MSG_ENCRYPTED_DATA: {
+      size_t length = request->header.payload_len;
+      if (length > MAX_MSG_DATA_SIZE - 5) {
+        return error_response(response, "Message is too long for an echo reply.");
+      }
+      uint8_t text[MAX_MSG_DATA_SIZE + 1];
+      memcpy(text, "echo ", 5);
+      if (request->header.msg_type == MSG_ENCRYPTED_DATA) {
+        if (*server_key == NULL_CRYPTO_KEY) {
+          return error_response(response, "Exchange keys before sending encrypted data.");
+        }
+        // bytes outside the cipher alphabet cannot be valid encrypted input.
+        for (size_t i = 0; i < length; i++) {
+          if (request->payload[i] >= 64) {
+            return error_response(response, "Invalid encrypted data.");
+          }
+        }
+        if (length > 0 && decrypt_string(*server_key, text + 5,
+                                         request->payload, length) < 0) {
+          return error_response(response, "Could not decrypt message.");
+        }
+      } else {
+        memcpy(text + 5, request->payload, length);
+      }
+      length += 5;
+      text[length] = '\0';
+      if (request->header.msg_type == MSG_ENCRYPTED_DATA) {
+        if (encrypt_string(*server_key, response->payload, text, length) < 0) {
+          return error_response(response, "Could not encrypt reply.");
+        }
+      } else {
+        memcpy(response->payload, text, length);
+      }
+      response->header.payload_len = (uint16_t)length;
+      response->payload[length] = '\0';
+      return 0;
+    }
+    default:
+      return error_response(response, "Unsupported message type.");
+  }
+}
+
+static int service_client_loop(int fd) {
+  crypto_msg_t *request = calloc(1, BUFFER_SIZE + 1);
+  crypto_msg_t *response = calloc(1, BUFFER_SIZE + 1);
+  if (!request || !response) {
+    free(request);
+    free(response);
+    fprintf(stderr, "Could not allocate message buffers.\n");
+    return RC_CLIENT_EXITED;
+  }
+  // these keys belong to one connection and are reset for the next client.
+  crypto_key_t server_key = NULL_CRYPTO_KEY;
+  crypto_key_t client_key = NULL_CRYPTO_KEY;
+  int result = RC_CLIENT_EXITED;
+  while (1) {
+    int status = receive_message(fd, request);
+    if (status != 1) {
+      if (status < 0) perror("receive request");
+      break;
+    }
+    show_message(request, server_key, SERVER_MODE);
+    status = build_response(request, response, &server_key, &client_key);
+    if (status != RC_OK) {
+      result = status;
+      break;
+    }
+    show_message(response, server_key, SERVER_MODE);
+    if (send_message(fd, response) < 0) {
+      perror("send response");
+      break;
+    }
+  }
+  free(request);
+  free(response);
+  return result;
+}
+
+static int server_loop(int fd) {
+  while (1) {
+    struct sockaddr_in client;
+    socklen_t length = sizeof(client);
+    printf("Waiting for client connection...\n");
+    client_sockfd = accept(fd, (struct sockaddr *)&client, &length);
+    if (client_sockfd < 0) {
+      if (errno == EINTR) continue;
+      perror("accept");
+      return -1;
+    }
+    char address[INET_ADDRSTRLEN];
+    if (!inet_ntop(AF_INET, &client.sin_addr, address, sizeof(address))) {
+      strcpy(address, "unknown");
+    }
+    printf("Client connected: %s:%u\n", address, ntohs(client.sin_port));
+    int result = RC_CLIENT_EXITED;
+    if (prepare_socket(client_sockfd) < 0) perror("socket options");
+    else result = service_client_loop(client_sockfd);
+    close(client_sockfd);
+    client_sockfd = -1;
+    printf("Client disconnected.\n");
+    if (result == RC_CLIENT_REQ_SERVER_EXIT) return 0;
+  }
+}
+
 void start_server(const char* addr, int port) {
-    printf("Student TODO: Implement start_server()\n");
-    printf("  - Create TCP socket\n");
-    printf("  - Bind to %s:%d\n", addr, port);
-    printf("  - Listen for connections (BACKLOG = %d)\n", BACKLOG);
-    printf("  - Accept and handle clients in a loop\n");
-    printf("  - Close socket on shutdown\n");
+  struct sockaddr_in server = {0};
+  server.sin_family = AF_INET;
+  server.sin_port = htons((uint16_t)port);
+  if (inet_pton(AF_INET, addr, &server.sin_addr) != 1) {
+    fprintf(stderr, "Invalid bind address: %s\n", addr);
+    exit(EXIT_FAILURE);
+  }
+  server_sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  if (server_sockfd < 0) {
+    perror("socket");
+    exit(EXIT_FAILURE);
+  }
+  int enabled = 1;
+  if (setsockopt(server_sockfd, SOL_SOCKET, SO_REUSEADDR,
+                 &enabled, sizeof(enabled)) < 0 ||
+      bind(server_sockfd, (struct sockaddr *)&server, sizeof(server)) < 0 ||
+      listen(server_sockfd, BACKLOG) < 0) {
+    perror("server setup");
+    close(server_sockfd);
+    server_sockfd = -1;
+    exit(EXIT_FAILURE);
+  }
+  printf("Server listening on %s:%d\n", addr, port);
+  int result = server_loop(server_sockfd);
+  close(server_sockfd);
+  server_sockfd = -1;
+  if (result < 0) exit(EXIT_FAILURE);
 }
