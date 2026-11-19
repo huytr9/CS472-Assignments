@@ -511,12 +511,54 @@ int dp_recv(dp_connection_t *conn, void *buffer, size_t capacity, size_t *out_le
      * protocol violation (wrong stream, bad offset/length, missing or early
      * FIN). Return -1 on socket error.
      */
-    (void)buffer;
-    (void)capacity;
-    (void)out_len;
-    fprintf(stderr, "%s: dp_recv: NOT IMPLEMENTED\n",
-            conn && conn->role ? conn->role : "dp-proto");
-    return DP_ERR_NOT_IMPLEMENTED;
+  if (!conn || conn->fd < 0 || !buffer || !out_len) return -1;
+  *out_len = 0;
+  size_t received = 0;
+  uint32_t message_length = 0;
+  int started = 0;
+  while (1) {
+    dp_packet_t packet = {0};
+    int status = recv_packet(conn, &packet, -1);
+    if (status < 0) return -1;
+    if (status <= 2 || packet.connection_id != conn->connection_id) continue;
+    if (packet.type == DP_CONNECT) {
+      if (send_connect_ack(conn) < 0) return -1;
+      continue;
+    }
+    if (packet.type == DP_CLOSE) {
+      if (send_close_ack(conn, packet.packet_number) < 0) return -1;
+      return 1;
+    }
+    if (packet.type != DP_DATA) continue;
+    if (packet.packet_number < conn->recv_next_packet) {
+      // the data was already copied, but its ack may not have arrived.
+      log_net_event(conn, "DUP", &packet, "already delivered, re-ACK");
+      if (send_ack(conn, packet.packet_number) < 0) return -1;
+      continue;
+    }
+    if (packet.packet_number > conn->recv_next_packet) continue;
+    if (!started) {
+      message_length = packet.message_length;
+      started = 1;
+    }
+    if (message_length > capacity) return -3;
+    if (packet.stream_id != 0 || packet.message_offset != received ||
+        packet.message_length != message_length) return -4;
+    size_t end = received + packet.payload_length;
+    if (end > message_length) return -4;
+    int finished = end == message_length;
+    if (finished != ((packet.flags & DP_FLAG_FIN) != 0)) return -4;
+    if (!finished && packet.payload_length == 0) return -4;
+    // only acknowledge bytes after checking and accepting them.
+    memcpy((uint8_t *)buffer + received, packet.payload, packet.payload_length);
+    received = end;
+    conn->recv_next_packet++;
+    if (send_ack(conn, packet.packet_number) < 0) return -1;
+    if (finished) {
+      *out_len = received;
+      return 0;
+    }
+  }
 }
 
 /* Called by the receiver after dp_recv() completes (provided). Keeps answering
@@ -558,9 +600,27 @@ int dp_close(dp_connection_t *conn) {
      * dropped or its CLOSE_ACK is lost, retransmit the same CLOSE packet.
      * Return 0 on success, -2 after conn->max_retries retransmissions.
      */
-    fprintf(stderr, "%s: dp_close: NOT IMPLEMENTED\n",
-            conn && conn->role ? conn->role : "dp-proto");
-    return DP_ERR_NOT_IMPLEMENTED;
+  if (!conn || conn->fd < 0) return -1;
+  dp_packet_t request = {0};
+  request.magic = DP_MAGIC;
+  request.type = DP_CLOSE;
+  request.connection_id = conn->connection_id;
+  request.packet_number = conn->next_packet_number++;
+  for (int retry = 0; retry <= conn->max_retries; retry++) {
+    if (net_simulate(conn, &request, DP_HEADER_SIZE) < 0) return -1;
+    long long deadline = deadline_after(conn->timeout_ms);
+    while (1) {
+      dp_packet_t reply = {0};
+      int status = recv_until(conn, &reply, deadline);
+      if (status < 0) return -1;
+      if (status == 0) break;
+      if (reply.type == DP_CLOSE_ACK && reply.connection_id == conn->connection_id &&
+          reply.packet_number == request.packet_number) return 0;
+    }
+    if (retry == conn->max_retries) return -2;
+    log_net_event(conn, "TIMEOUT", &request, "retransmitting");
+  }
+  return -2;
 }
 
 void dp_set_network_simulation(dp_connection_t *conn,
