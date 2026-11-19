@@ -388,9 +388,32 @@ int dp_connect(dp_connection_t *conn) {
      *     Give up with -2 after conn->max_retries retransmissions.
      *   - On success set next_packet_number and recv_next_packet to 1.
      */
-    fprintf(stderr, "%s: dp_connect: NOT IMPLEMENTED\n",
-            conn && conn->role ? conn->role : "dp-proto");
-    return DP_ERR_NOT_IMPLEMENTED;
+  if (!conn || conn->fd < 0) return -1;
+  if (conn->connection_id == 0) conn->connection_id = (uint32_t)rand() + 1U;
+  dp_packet_t request = {0};
+  request.magic = DP_MAGIC;
+  request.type = DP_CONNECT;
+  request.connection_id = conn->connection_id;
+  for (int retry = 0; retry <= conn->max_retries; retry++) {
+    if (net_simulate(conn, &request, DP_HEADER_SIZE) < 0) return -1;
+    long long deadline = deadline_after(conn->timeout_ms);
+    while (1) {
+      dp_packet_t reply = {0};
+      int status = recv_until(conn, &reply, deadline);
+      if (status < 0) return -1;
+      if (status == 0) break;
+      if (reply.type == DP_CONNECT_ACK &&
+          reply.connection_id == conn->connection_id && reply.packet_number == 0) {
+        conn->next_packet_number = 1;
+        conn->recv_next_packet = 1;
+        return 0;
+      }
+    }
+    if (retry == conn->max_retries) return -2;
+    // keep the same connection id when trying again.
+    log_net_event(conn, "TIMEOUT", &request, "retransmitting");
+  }
+  return -2;
 }
 
 static int send_data_packet(dp_connection_t *conn, const dp_packet_t *packet) {
@@ -409,10 +432,22 @@ static int send_data_packet(dp_connection_t *conn, const dp_packet_t *packet) {
      * A timeout does NOT prove that the DATA packet was lost: the DATA may
      * have arrived and its ACK may have been lost or delayed.
      */
-    (void)packet;
-    fprintf(stderr, "%s: send_data_packet: NOT IMPLEMENTED\n",
-            conn && conn->role ? conn->role : "dp-proto");
-    return DP_ERR_NOT_IMPLEMENTED;
+  for (int retry = 0; retry <= conn->max_retries; retry++) {
+    if (net_simulate(conn, packet, DP_HEADER_SIZE + packet->payload_length) < 0) return -1;
+    long long deadline = deadline_after(conn->timeout_ms);
+    while (1) {
+      dp_packet_t reply = {0};
+      int status = recv_until(conn, &reply, deadline);
+      if (status < 0) return -1;
+      if (status == 0) break;
+      if (reply.type == DP_ACK && reply.connection_id == conn->connection_id &&
+          reply.packet_number == packet->packet_number) return 0;
+      // an old ack does not restart the wait or use up a retry.
+    }
+    if (retry == conn->max_retries) return -2;
+    log_net_event(conn, "TIMEOUT", packet, "retransmitting");
+  }
+  return -2;
 }
 
 int dp_send(dp_connection_t *conn, const void *buffer, size_t len) {
