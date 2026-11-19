@@ -1,0 +1,129 @@
+dp-server: network logging enabled (-v).
+dp-server: listening on UDP 19079
+dp-server: NET: 1795114982.369907 IN  CONNECT     pkt=0 bytes=28
+dp-server: NET: 1795114982.369931 OUT CONN_ACK    pkt=0 bytes=28 DROP
+dp-server: accepted cid=13580057
+dp-server: NET: 1795114982.621098 IN  CONNECT     pkt=0 bytes=28
+dp-server: NET: 1795114982.621190 OUT CONN_ACK    pkt=0 bytes=28 DROP
+dp-server: NET: 1795114982.872067 IN  CONNECT     pkt=0 bytes=28
+dp-server: NET: 1795114982.872125 OUT CONN_ACK    pkt=0 bytes=28 DROP
+dp-server: NET: 1795114983.123305 IN  CONNECT     pkt=0 bytes=28
+dp-server: NET: 1795114983.123404 OUT CONN_ACK    pkt=0 bytes=28
+dp-server: NET: 1795114983.123683 IN  DATA        pkt=1 bytes=508
+dp-server: NET: 1795114983.123762 OUT ACK         pkt=1 bytes=28 DROP
+dp-server: NET: 1795114983.374848 IN  DATA        pkt=1 bytes=508
+dp-server: NET: 1795114983.374876 DUP DATA        pkt=1 already delivered, re-ACK
+dp-server: NET: 1795114983.374891 OUT ACK         pkt=1 bytes=28 DROP
+dp-server: NET: 1795114983.626064 IN  DATA        pkt=1 bytes=508
+dp-server: NET: 1795114983.626178 DUP DATA        pkt=1 already delivered, re-ACK
+dp-server: NET: 1795114983.626209 OUT ACK         pkt=1 bytes=28 DROP
+dp-server: NET: 1795114983.877206 IN  DATA        pkt=1 bytes=508
+dp-server: NET: 1795114983.877295 DUP DATA        pkt=1 already delivered, re-ACK
+dp-server: NET: 1795114983.877314 OUT ACK         pkt=1 bytes=28
+dp-server: NET: 1795114983.877485 IN  DATA        pkt=2 bytes=508
+dp-server: NET: 1795114983.877529 OUT ACK         pkt=2 bytes=28 DROP
+dp-server: NET: 1795114984.127888 IN  DATA        pkt=2 bytes=508
+dp-server: NET: 1795114984.127986 DUP DATA        pkt=2 already delivered, re-ACK
+dp-server: NET: 1795114984.128019 OUT ACK         pkt=2 bytes=28
+dp-server: NET: 1795114984.128241 IN  DATA        pkt=3 bytes=508
+dp-server: NET: 1795114984.128275 OUT ACK         pkt=3 bytes=28 DROP
+dp-server: NET: 1795114984.379433 IN  DATA        pkt=3 bytes=508
+dp-server: NET: 1795114984.379508 DUP DATA        pkt=3 already delivered, re-ACK
+dp-server: NET: 1795114984.379540 OUT ACK         pkt=3 bytes=28
+dp-server: NET: 1795114984.379731 IN  DATA        pkt=4 bytes=508
+dp-server: NET: 1795114984.379765 OUT ACK         pkt=4 bytes=28
+dp-server: NET: 1795114984.379922 IN  DATA        pkt=5 bytes=508
+dp-server: NET: 1795114984.379973 OUT ACK         pkt=5 bytes=28
+dp-server: NET: 1795114984.380126 IN  DATA        pkt=6 bytes=508
+dp-server: NET: 1795114984.380156 OUT ACK         pkt=6 bytes=28
+dp-server: NET: 1795114984.380356 IN  DATA        pkt=7 bytes=508
+dp-server: NET: 1795114984.380412 OUT ACK         pkt=7 bytes=28 DROP
+dp-server: NET: 1795114984.631574 IN  DATA        pkt=7 bytes=508
+dp-server: NET: 1795114984.631663 DUP DATA        pkt=7 already delivered, re-ACK
+dp-server: NET: 1795114984.631695 OUT ACK         pkt=7 bytes=28
+dp-server: NET: 1795114984.631894 IN  DATA        pkt=8 bytes=508
+dp-server: NET: 1795114984.631941 OUT ACK         pkt=8 bytes=28 DROP
+dp-server: NET: 1795114984.882929 IN  DATA        pkt=8 bytes=508
+dp-server: NET: 1795114984.883011 DUP DATA        pkt=8 already delivered, re-ACK
+dp-server: NET: 1795114984.883043 OUT ACK         pkt=8 bytes=28 DROP
+dp-server: NET: 1795114985.134103 IN  DATA        pkt=8 bytes=508
+dp-server: NET: 1795114985.134190 DUP DATA        pkt=8 already delivered, re-ACK
+dp-server: NET: 1795114985.134222 OUT ACK         pkt=8 bytes=28 DROP
+dp-server: NET: 1795114985.385284 IN  DATA        pkt=8 bytes=508
+dp-server: NET: 1795114985.385365 DUP DATA        pkt=8 already delivered, re-ACK
+dp-server: NET: 1795114985.385394 OUT ACK         pkt=8 bytes=28 DROP
+dp-server: NET: 1795114985.636458 IN  DATA        pkt=8 bytes=508
+dp-server: NET: 1795114985.636546 DUP DATA        pkt=8 already delivered, re-ACK
+dp-server: NET: 1795114985.636580 OUT ACK         pkt=8 bytes=28
+dp-server: NET: 1795114985.636779 IN  DATA        pkt=9 bytes=508
+dp-server: NET: 1795114985.636836 OUT ACK         pkt=9 bytes=28 DROP
+dp-server: NET: 1795114985.887876 IN  DATA        pkt=9 bytes=508
+dp-server: NET: 1795114985.887966 DUP DATA        pkt=9 already delivered, re-ACK
+dp-server: NET: 1795114985.888028 OUT ACK         pkt=9 bytes=28
+dp-server: NET: 1795114985.888244 IN  DATA        pkt=10 bytes=508
+dp-server: NET: 1795114985.888291 OUT ACK         pkt=10 bytes=28
+dp-server: NET: 1795114985.888466 IN  DATA        pkt=11 bytes=508
+dp-server: NET: 1795114985.888511 OUT ACK         pkt=11 bytes=28 DROP
+dp-server: NET: 1795114986.138822 IN  DATA        pkt=11 bytes=508
+dp-server: NET: 1795114986.138910 DUP DATA        pkt=11 already delivered, re-ACK
+dp-server: NET: 1795114986.138937 OUT ACK         pkt=11 bytes=28 DROP
+dp-server: NET: 1795114986.389719 IN  DATA        pkt=11 bytes=508
+dp-server: NET: 1795114986.389807 DUP DATA        pkt=11 already delivered, re-ACK
+dp-server: NET: 1795114986.389836 OUT ACK         pkt=11 bytes=28 DROP
+dp-server: NET: 1795114986.640912 IN  DATA        pkt=11 bytes=508
+dp-server: NET: 1795114986.640997 DUP DATA        pkt=11 already delivered, re-ACK
+dp-server: NET: 1795114986.641027 OUT ACK         pkt=11 bytes=28 DROP
+dp-server: NET: 1795114986.892044 IN  DATA        pkt=11 bytes=508
+dp-server: NET: 1795114986.892110 DUP DATA        pkt=11 already delivered, re-ACK
+dp-server: NET: 1795114986.892129 OUT ACK         pkt=11 bytes=28
+dp-server: NET: 1795114986.892258 IN  DATA        pkt=12 bytes=508
+dp-server: NET: 1795114986.892282 OUT ACK         pkt=12 bytes=28 DROP
+dp-server: NET: 1795114987.143029 IN  DATA        pkt=12 bytes=508
+dp-server: NET: 1795114987.143144 DUP DATA        pkt=12 already delivered, re-ACK
+dp-server: NET: 1795114987.143177 OUT ACK         pkt=12 bytes=28 DROP
+dp-server: NET: 1795114987.394140 IN  DATA        pkt=12 bytes=508
+dp-server: NET: 1795114987.394207 DUP DATA        pkt=12 already delivered, re-ACK
+dp-server: NET: 1795114987.394225 OUT ACK         pkt=12 bytes=28 DROP
+dp-server: NET: 1795114987.645336 IN  DATA        pkt=12 bytes=508
+dp-server: NET: 1795114987.645433 DUP DATA        pkt=12 already delivered, re-ACK
+dp-server: NET: 1795114987.645461 OUT ACK         pkt=12 bytes=28
+dp-server: NET: 1795114987.645658 IN  DATA        pkt=13 bytes=508
+dp-server: NET: 1795114987.645692 OUT ACK         pkt=13 bytes=28
+dp-server: NET: 1795114987.645849 IN  DATA        pkt=14 bytes=508
+dp-server: NET: 1795114987.645903 OUT ACK         pkt=14 bytes=28 DROP
+dp-server: NET: 1795114987.896664 IN  DATA        pkt=14 bytes=508
+dp-server: NET: 1795114987.896724 DUP DATA        pkt=14 already delivered, re-ACK
+dp-server: NET: 1795114987.896740 OUT ACK         pkt=14 bytes=28 DROP
+dp-server: NET: 1795114988.147120 IN  DATA        pkt=14 bytes=508
+dp-server: NET: 1795114988.147202 DUP DATA        pkt=14 already delivered, re-ACK
+dp-server: NET: 1795114988.147231 OUT ACK         pkt=14 bytes=28 DROP
+dp-server: NET: 1795114988.398150 IN  DATA        pkt=14 bytes=508
+dp-server: NET: 1795114988.398237 DUP DATA        pkt=14 already delivered, re-ACK
+dp-server: NET: 1795114988.398262 OUT ACK         pkt=14 bytes=28
+dp-server: NET: 1795114988.398441 IN  DATA        pkt=15 bytes=508
+dp-server: NET: 1795114988.398481 OUT ACK         pkt=15 bytes=28 DROP
+dp-server: NET: 1795114988.649654 IN  DATA        pkt=15 bytes=508
+dp-server: NET: 1795114988.649740 DUP DATA        pkt=15 already delivered, re-ACK
+dp-server: NET: 1795114988.649769 OUT ACK         pkt=15 bytes=28 DROP
+dp-server: NET: 1795114988.901174 IN  DATA        pkt=15 bytes=508
+dp-server: NET: 1795114988.901280 DUP DATA        pkt=15 already delivered, re-ACK
+dp-server: NET: 1795114988.901311 OUT ACK         pkt=15 bytes=28
+dp-server: NET: 1795114988.901632 IN  DATA        pkt=16 bytes=508
+dp-server: NET: 1795114988.901691 OUT ACK         pkt=16 bytes=28 DROP
+dp-server: NET: 1795114989.152833 IN  DATA        pkt=16 bytes=508
+dp-server: NET: 1795114989.152946 DUP DATA        pkt=16 already delivered, re-ACK
+dp-server: NET: 1795114989.152975 OUT ACK         pkt=16 bytes=28
+dp-server: NET: 1795114989.153220 IN  DATA        pkt=17 bytes=508
+dp-server: NET: 1795114989.153278 OUT ACK         pkt=17 bytes=28
+dp-server: NET: 1795114989.153467 IN  DATA        pkt=18 bytes=60
+dp-server: NET: 1795114989.153540 OUT ACK         pkt=18 bytes=28
+dp-server: received 8192 bytes
+dp-server: verify: PASS
+dp-server: NET: 1795114989.153734 IN  CLOSE       pkt=19 bytes=28
+dp-server: NET: 1795114989.153766 OUT CLOSE_ACK   pkt=19 bytes=28 DROP
+dp-server: NET: 1795114989.404904 IN  CLOSE       pkt=19 bytes=28
+dp-server: NET: 1795114989.404997 OUT CLOSE_ACK   pkt=19 bytes=28 DROP
+dp-server: NET: 1795114989.655438 IN  CLOSE       pkt=19 bytes=28
+dp-server: NET: 1795114989.655512 OUT CLOSE_ACK   pkt=19 bytes=28
+dp-server: close: PASS
+dp-server: network: attempted=49 dropped=29 delivered=20 delayed=0 avg-delay=0.00ms

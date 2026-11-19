@@ -1,0 +1,556 @@
+       0.000 ms  dp-client: NET: OUT CONNECT     pkt=0 bytes=28 delay=20ms
+      25.145 ms  dp-server: NET: IN  CONNECT     pkt=0 bytes=28
+      25.181 ms  dp-server: NET: OUT CONN_ACK    pkt=0 bytes=28 delay=3ms
+      29.061 ms  dp-client: NET: IN  CONN_ACK    pkt=0 bytes=28
+      29.132 ms  dp-client: NET: OUT DATA        pkt=1 bytes=508 delay=18ms
+      50.509 ms  dp-server: NET: IN  DATA        pkt=1 bytes=508
+      50.602 ms  dp-server: NET: OUT ACK         pkt=1 bytes=28
+      50.731 ms  dp-client: NET: IN  ACK         pkt=1 bytes=28
+      50.777 ms  dp-client: NET: OUT DATA        pkt=2 bytes=508 delay=5ms
+      57.143 ms  dp-server: NET: IN  DATA        pkt=2 bytes=508
+      57.189 ms  dp-server: NET: OUT ACK         pkt=2 bytes=28 delay=9ms
+      68.550 ms  dp-client: NET: IN  ACK         pkt=2 bytes=28
+      68.592 ms  dp-client: NET: OUT DATA        pkt=3 bytes=508 delay=18ms
+      87.982 ms  dp-server: NET: IN  DATA        pkt=3 bytes=508
+      88.024 ms  dp-server: NET: OUT ACK         pkt=3 bytes=28 delay=14ms
+     103.626 ms  dp-client: NET: IN  ACK         pkt=3 bytes=28
+     103.697 ms  dp-client: NET: OUT DATA        pkt=4 bytes=508 delay=2ms
+     106.338 ms  dp-server: NET: IN  DATA        pkt=4 bytes=508
+     106.388 ms  dp-server: NET: OUT ACK         pkt=4 bytes=28 delay=20ms
+     130.741 ms  dp-client: NET: IN  ACK         pkt=4 bytes=28
+     130.799 ms  dp-client: NET: OUT DATA        pkt=5 bytes=508 delay=1ms
+     132.155 ms  dp-server: NET: IN  DATA        pkt=5 bytes=508
+     132.191 ms  dp-server: NET: OUT ACK         pkt=5 bytes=28 delay=8ms
+     142.326 ms  dp-client: NET: IN  ACK         pkt=5 bytes=28
+     142.397 ms  dp-client: NET: OUT DATA        pkt=6 bytes=508
+     142.504 ms  dp-server: NET: IN  DATA        pkt=6 bytes=508
+     142.546 ms  dp-server: NET: OUT ACK         pkt=6 bytes=28 delay=2ms
+     145.140 ms  dp-client: NET: IN  ACK         pkt=6 bytes=28
+     145.164 ms  dp-client: NET: OUT DATA        pkt=7 bytes=508 delay=19ms
+     169.036 ms  dp-server: NET: IN  DATA        pkt=7 bytes=508
+     169.106 ms  dp-server: NET: OUT ACK         pkt=7 bytes=28 delay=11ms
+     182.967 ms  dp-client: NET: IN  ACK         pkt=7 bytes=28
+     183.016 ms  dp-client: NET: OUT DATA        pkt=8 bytes=508 delay=13ms
+     198.849 ms  dp-server: NET: IN  DATA        pkt=8 bytes=508
+     198.891 ms  dp-server: NET: OUT ACK         pkt=8 bytes=28 delay=13ms
+     213.025 ms  dp-client: NET: IN  ACK         pkt=8 bytes=28
+     213.069 ms  dp-client: NET: OUT DATA        pkt=9 bytes=508 delay=6ms
+     219.451 ms  dp-server: NET: IN  DATA        pkt=9 bytes=508
+     219.499 ms  dp-server: NET: OUT ACK         pkt=9 bytes=28 delay=7ms
+     228.334 ms  dp-client: NET: IN  ACK         pkt=9 bytes=28
+     228.369 ms  dp-client: NET: OUT DATA        pkt=10 bytes=508 delay=6ms
+     235.996 ms  dp-server: NET: IN  DATA        pkt=10 bytes=508
+     236.042 ms  dp-server: NET: OUT ACK         pkt=10 bytes=28 delay=5ms
+     242.388 ms  dp-client: NET: IN  ACK         pkt=10 bytes=28
+     242.428 ms  dp-client: NET: OUT DATA        pkt=11 bytes=508
+     242.514 ms  dp-server: NET: IN  DATA        pkt=11 bytes=508
+     242.547 ms  dp-server: NET: OUT ACK         pkt=11 bytes=28 delay=13ms
+     255.985 ms  dp-client: NET: IN  ACK         pkt=11 bytes=28
+     256.020 ms  dp-client: NET: OUT DATA        pkt=12 bytes=508 delay=14ms
+     273.578 ms  dp-server: NET: IN  DATA        pkt=12 bytes=508
+     273.614 ms  dp-server: NET: OUT ACK         pkt=12 bytes=28 delay=15ms
+     292.438 ms  dp-client: NET: IN  ACK         pkt=12 bytes=28
+     292.477 ms  dp-client: NET: OUT DATA        pkt=13 bytes=508 delay=7ms
+     301.311 ms  dp-server: NET: IN  DATA        pkt=13 bytes=508
+     301.346 ms  dp-server: NET: OUT ACK         pkt=13 bytes=28 delay=9ms
+     312.689 ms  dp-client: NET: IN  ACK         pkt=13 bytes=28
+     312.730 ms  dp-client: NET: OUT DATA        pkt=14 bytes=508 delay=10ms
+     324.800 ms  dp-server: NET: IN  DATA        pkt=14 bytes=508
+     324.840 ms  dp-server: NET: OUT ACK         pkt=14 bytes=28 delay=16ms
+     345.011 ms  dp-client: NET: IN  ACK         pkt=14 bytes=28
+     345.072 ms  dp-client: NET: OUT DATA        pkt=15 bytes=508 delay=6ms
+     352.669 ms  dp-server: NET: IN  DATA        pkt=15 bytes=508
+     352.717 ms  dp-server: NET: OUT ACK         pkt=15 bytes=28 delay=7ms
+     360.752 ms  dp-client: NET: IN  ACK         pkt=15 bytes=28
+     360.788 ms  dp-client: NET: OUT DATA        pkt=16 bytes=508 delay=16ms
+     380.598 ms  dp-server: NET: IN  DATA        pkt=16 bytes=508
+     380.665 ms  dp-server: NET: OUT ACK         pkt=16 bytes=28 delay=19ms
+     404.180 ms  dp-client: NET: IN  ACK         pkt=16 bytes=28
+     404.233 ms  dp-client: NET: OUT DATA        pkt=17 bytes=508 delay=11ms
+     418.145 ms  dp-server: NET: IN  DATA        pkt=17 bytes=508
+     418.204 ms  dp-server: NET: OUT ACK         pkt=17 bytes=28 delay=9ms
+     427.738 ms  dp-client: NET: IN  ACK         pkt=17 bytes=28
+     427.782 ms  dp-client: NET: OUT DATA        pkt=18 bytes=508 delay=20ms
+     452.724 ms  dp-server: NET: IN  DATA        pkt=18 bytes=508
+     452.784 ms  dp-server: NET: OUT ACK         pkt=18 bytes=28 delay=11ms
+     466.699 ms  dp-client: NET: IN  ACK         pkt=18 bytes=28
+     466.763 ms  dp-client: NET: OUT DATA        pkt=19 bytes=508 delay=8ms
+     476.090 ms  dp-server: NET: IN  DATA        pkt=19 bytes=508
+     476.156 ms  dp-server: NET: OUT ACK         pkt=19 bytes=28 delay=10ms
+     486.617 ms  dp-client: NET: IN  ACK         pkt=19 bytes=28
+     486.677 ms  dp-client: NET: OUT DATA        pkt=20 bytes=508 delay=17ms
+     508.075 ms  dp-server: NET: IN  DATA        pkt=20 bytes=508
+     508.128 ms  dp-server: NET: OUT ACK         pkt=20 bytes=28 delay=18ms
+     527.890 ms  dp-client: NET: IN  ACK         pkt=20 bytes=28
+     527.948 ms  dp-client: NET: OUT DATA        pkt=21 bytes=508 delay=20ms
+     549.267 ms  dp-server: NET: IN  DATA        pkt=21 bytes=508
+     549.321 ms  dp-server: NET: OUT ACK         pkt=21 bytes=28 delay=3ms
+     553.179 ms  dp-client: NET: IN  ACK         pkt=21 bytes=28
+     553.217 ms  dp-client: NET: OUT DATA        pkt=22 bytes=508 delay=10ms
+     565.793 ms  dp-server: NET: IN  DATA        pkt=22 bytes=508
+     565.829 ms  dp-server: NET: OUT ACK         pkt=22 bytes=28 delay=2ms
+     568.444 ms  dp-client: NET: IN  ACK         pkt=22 bytes=28
+     568.491 ms  dp-client: NET: OUT DATA        pkt=23 bytes=508 delay=4ms
+     573.610 ms  dp-server: NET: IN  DATA        pkt=23 bytes=508
+     573.674 ms  dp-server: NET: OUT ACK         pkt=23 bytes=28 delay=20ms
+     594.534 ms  dp-client: NET: IN  ACK         pkt=23 bytes=28
+     594.572 ms  dp-client: NET: OUT DATA        pkt=24 bytes=508 delay=16ms
+     614.765 ms  dp-server: NET: IN  DATA        pkt=24 bytes=508
+     614.842 ms  dp-server: NET: OUT ACK         pkt=24 bytes=28 delay=12ms
+     628.509 ms  dp-client: NET: IN  ACK         pkt=24 bytes=28
+     628.588 ms  dp-client: NET: OUT DATA        pkt=25 bytes=508 delay=2ms
+     630.749 ms  dp-server: NET: IN  DATA        pkt=25 bytes=508
+     630.786 ms  dp-server: NET: OUT ACK         pkt=25 bytes=28 delay=6ms
+     638.465 ms  dp-client: NET: IN  ACK         pkt=25 bytes=28
+     638.522 ms  dp-client: NET: OUT DATA        pkt=26 bytes=508 delay=16ms
+     655.749 ms  dp-server: NET: IN  DATA        pkt=26 bytes=508
+     655.792 ms  dp-server: NET: OUT ACK         pkt=26 bytes=28 delay=10ms
+     668.394 ms  dp-client: NET: IN  ACK         pkt=26 bytes=28
+     668.440 ms  dp-client: NET: OUT DATA        pkt=27 bytes=508 delay=17ms
+     688.995 ms  dp-server: NET: IN  DATA        pkt=27 bytes=508
+     689.035 ms  dp-server: NET: OUT ACK         pkt=27 bytes=28 delay=19ms
+     712.853 ms  dp-client: NET: IN  ACK         pkt=27 bytes=28
+     712.893 ms  dp-client: NET: OUT DATA        pkt=28 bytes=508 delay=20ms
+     736.742 ms  dp-server: NET: IN  DATA        pkt=28 bytes=508
+     736.808 ms  dp-server: NET: OUT ACK         pkt=28 bytes=28 delay=2ms
+     738.995 ms  dp-client: NET: IN  ACK         pkt=28 bytes=28
+     739.034 ms  dp-client: NET: OUT DATA        pkt=29 bytes=508 delay=3ms
+     742.896 ms  dp-server: NET: IN  DATA        pkt=29 bytes=508
+     742.951 ms  dp-server: NET: OUT ACK         pkt=29 bytes=28 delay=3ms
+     746.792 ms  dp-client: NET: IN  ACK         pkt=29 bytes=28
+     746.826 ms  dp-client: NET: OUT DATA        pkt=30 bytes=508 delay=20ms
+     767.644 ms  dp-server: NET: IN  DATA        pkt=30 bytes=508
+     767.676 ms  dp-server: NET: OUT ACK         pkt=30 bytes=28 delay=16ms
+     785.053 ms  dp-client: NET: IN  ACK         pkt=30 bytes=28
+     785.070 ms  dp-client: NET: OUT DATA        pkt=31 bytes=508 delay=20ms
+     810.134 ms  dp-server: NET: IN  DATA        pkt=31 bytes=508
+     810.164 ms  dp-server: NET: OUT ACK         pkt=31 bytes=28 delay=15ms
+     829.008 ms  dp-client: NET: IN  ACK         pkt=31 bytes=28
+     829.035 ms  dp-client: NET: OUT DATA        pkt=32 bytes=508 delay=19ms
+     852.877 ms  dp-server: NET: IN  DATA        pkt=32 bytes=508
+     852.937 ms  dp-server: NET: OUT ACK         pkt=32 bytes=28 delay=7ms
+     861.768 ms  dp-client: NET: IN  ACK         pkt=32 bytes=28
+     861.788 ms  dp-client: NET: OUT DATA        pkt=33 bytes=508 delay=20ms
+     884.803 ms  dp-server: NET: IN  DATA        pkt=33 bytes=508
+     884.865 ms  dp-server: NET: OUT ACK         pkt=33 bytes=28 delay=15ms
+     901.541 ms  dp-client: NET: IN  ACK         pkt=33 bytes=28
+     901.620 ms  dp-client: NET: OUT DATA        pkt=34 bytes=508 delay=1ms
+     902.973 ms  dp-server: NET: IN  DATA        pkt=34 bytes=508
+     903.012 ms  dp-server: NET: OUT ACK         pkt=34 bytes=28 delay=5ms
+     909.373 ms  dp-client: NET: IN  ACK         pkt=34 bytes=28
+     909.405 ms  dp-client: NET: OUT DATA        pkt=35 bytes=508 delay=5ms
+     915.752 ms  dp-server: NET: IN  DATA        pkt=35 bytes=508
+     915.805 ms  dp-server: NET: OUT ACK         pkt=35 bytes=28 delay=1ms
+     917.140 ms  dp-client: NET: IN  ACK         pkt=35 bytes=28
+     917.168 ms  dp-client: NET: OUT DATA        pkt=36 bytes=508 delay=17ms
+     935.773 ms  dp-server: NET: IN  DATA        pkt=36 bytes=508
+     935.843 ms  dp-server: NET: OUT ACK         pkt=36 bytes=28 delay=9ms
+     946.674 ms  dp-client: NET: IN  ACK         pkt=36 bytes=28
+     946.710 ms  dp-client: NET: OUT DATA        pkt=37 bytes=508 delay=5ms
+     953.045 ms  dp-server: NET: IN  DATA        pkt=37 bytes=508
+     953.082 ms  dp-server: NET: OUT ACK         pkt=37 bytes=28 delay=16ms
+     970.649 ms  dp-client: NET: IN  ACK         pkt=37 bytes=28
+     970.682 ms  dp-client: NET: OUT DATA        pkt=38 bytes=508 delay=3ms
+     974.528 ms  dp-server: NET: IN  DATA        pkt=38 bytes=508
+     974.572 ms  dp-server: NET: OUT ACK         pkt=38 bytes=28 delay=9ms
+     984.511 ms  dp-client: NET: IN  ACK         pkt=38 bytes=28
+     984.550 ms  dp-client: NET: OUT DATA        pkt=39 bytes=508 delay=11ms
+     998.365 ms  dp-server: NET: IN  DATA        pkt=39 bytes=508
+     998.403 ms  dp-server: NET: OUT ACK         pkt=39 bytes=28 delay=1ms
+     999.708 ms  dp-client: NET: IN  ACK         pkt=39 bytes=28
+     999.721 ms  dp-client: NET: OUT DATA        pkt=40 bytes=508 delay=15ms
+    1017.740 ms  dp-server: NET: IN  DATA        pkt=40 bytes=508
+    1017.770 ms  dp-server: NET: OUT ACK         pkt=40 bytes=28 delay=11ms
+    1029.764 ms  dp-client: NET: IN  ACK         pkt=40 bytes=28
+    1029.796 ms  dp-client: NET: OUT DATA        pkt=41 bytes=508 delay=5ms
+    1036.095 ms  dp-server: NET: IN  DATA        pkt=41 bytes=508
+    1036.123 ms  dp-server: NET: OUT ACK         pkt=41 bytes=28 delay=2ms
+    1038.683 ms  dp-client: NET: IN  ACK         pkt=41 bytes=28
+    1038.705 ms  dp-client: NET: OUT DATA        pkt=42 bytes=508 delay=3ms
+    1042.258 ms  dp-server: NET: IN  DATA        pkt=42 bytes=508
+    1042.294 ms  dp-server: NET: OUT ACK         pkt=42 bytes=28 delay=5ms
+    1048.640 ms  dp-client: NET: IN  ACK         pkt=42 bytes=28
+    1048.675 ms  dp-client: NET: OUT DATA        pkt=43 bytes=508 delay=11ms
+    1062.521 ms  dp-server: NET: IN  DATA        pkt=43 bytes=508
+    1062.567 ms  dp-server: NET: OUT ACK         pkt=43 bytes=28 delay=18ms
+    1082.521 ms  dp-client: NET: IN  ACK         pkt=43 bytes=28
+    1082.570 ms  dp-client: NET: OUT DATA        pkt=44 bytes=508 delay=17ms
+    1100.687 ms  dp-server: NET: IN  DATA        pkt=44 bytes=508
+    1100.740 ms  dp-server: NET: OUT ACK         pkt=44 bytes=28 delay=10ms
+    1113.027 ms  dp-client: NET: IN  ACK         pkt=44 bytes=28
+    1113.124 ms  dp-client: NET: OUT DATA        pkt=45 bytes=508 delay=19ms
+    1132.285 ms  dp-server: NET: IN  DATA        pkt=45 bytes=508
+    1132.351 ms  dp-server: NET: OUT ACK         pkt=45 bytes=28 delay=1ms
+    1133.736 ms  dp-client: NET: IN  ACK         pkt=45 bytes=28
+    1133.780 ms  dp-client: NET: OUT DATA        pkt=46 bytes=508 delay=11ms
+    1147.158 ms  dp-server: NET: IN  DATA        pkt=46 bytes=508
+    1147.199 ms  dp-server: NET: OUT ACK         pkt=46 bytes=28 delay=10ms
+    1158.653 ms  dp-client: NET: IN  ACK         pkt=46 bytes=28
+    1158.698 ms  dp-client: NET: OUT DATA        pkt=47 bytes=508 delay=4ms
+    1163.791 ms  dp-server: NET: IN  DATA        pkt=47 bytes=508
+    1163.825 ms  dp-server: NET: OUT ACK         pkt=47 bytes=28 delay=8ms
+    1173.912 ms  dp-client: NET: IN  ACK         pkt=47 bytes=28
+    1173.949 ms  dp-client: NET: OUT DATA        pkt=48 bytes=508 delay=10ms
+    1185.935 ms  dp-server: NET: IN  DATA        pkt=48 bytes=508
+    1185.978 ms  dp-server: NET: OUT ACK         pkt=48 bytes=28 delay=1ms
+    1187.331 ms  dp-client: NET: IN  ACK         pkt=48 bytes=28
+    1187.365 ms  dp-client: NET: OUT DATA        pkt=49 bytes=508 delay=11ms
+    1200.214 ms  dp-server: NET: IN  DATA        pkt=49 bytes=508
+    1200.260 ms  dp-server: NET: OUT ACK         pkt=49 bytes=28 delay=7ms
+    1209.097 ms  dp-client: NET: IN  ACK         pkt=49 bytes=28
+    1209.135 ms  dp-client: NET: OUT DATA        pkt=50 bytes=508 delay=2ms
+    1211.700 ms  dp-server: NET: IN  DATA        pkt=50 bytes=508
+    1211.724 ms  dp-server: NET: OUT ACK         pkt=50 bytes=28 delay=6ms
+    1218.839 ms  dp-client: NET: IN  ACK         pkt=50 bytes=28
+    1218.885 ms  dp-client: NET: OUT DATA        pkt=51 bytes=508 delay=17ms
+    1238.586 ms  dp-server: NET: IN  DATA        pkt=51 bytes=508
+    1238.631 ms  dp-server: NET: OUT ACK         pkt=51 bytes=28 delay=15ms
+    1254.342 ms  dp-client: NET: IN  ACK         pkt=51 bytes=28
+    1254.393 ms  dp-client: NET: OUT DATA        pkt=52 bytes=508 delay=11ms
+    1266.679 ms  dp-server: NET: IN  DATA        pkt=52 bytes=508
+    1266.725 ms  dp-server: NET: OUT ACK         pkt=52 bytes=28 delay=16ms
+    1286.807 ms  dp-client: NET: IN  ACK         pkt=52 bytes=28
+    1286.855 ms  dp-client: NET: OUT DATA        pkt=53 bytes=508 delay=13ms
+    1303.199 ms  dp-server: NET: IN  DATA        pkt=53 bytes=508
+    1303.251 ms  dp-server: NET: OUT ACK         pkt=53 bytes=28 delay=17ms
+    1321.529 ms  dp-client: NET: IN  ACK         pkt=53 bytes=28
+    1321.567 ms  dp-client: NET: OUT DATA        pkt=54 bytes=508 delay=3ms
+    1325.418 ms  dp-server: NET: IN  DATA        pkt=54 bytes=508
+    1325.452 ms  dp-server: NET: OUT ACK         pkt=54 bytes=28 delay=8ms
+    1335.594 ms  dp-client: NET: IN  ACK         pkt=54 bytes=28
+    1335.671 ms  dp-client: NET: OUT DATA        pkt=55 bytes=508 delay=8ms
+    1345.102 ms  dp-server: NET: IN  DATA        pkt=55 bytes=508
+    1345.151 ms  dp-server: NET: OUT ACK         pkt=55 bytes=28 delay=2ms
+    1347.763 ms  dp-client: NET: IN  ACK         pkt=55 bytes=28
+    1347.811 ms  dp-client: NET: OUT DATA        pkt=56 bytes=508 delay=15ms
+    1363.044 ms  dp-server: NET: IN  DATA        pkt=56 bytes=508
+    1363.104 ms  dp-server: NET: OUT ACK         pkt=56 bytes=28 delay=19ms
+    1386.983 ms  dp-client: NET: IN  ACK         pkt=56 bytes=28
+    1387.062 ms  dp-client: NET: OUT DATA        pkt=57 bytes=508 delay=16ms
+    1407.163 ms  dp-server: NET: IN  DATA        pkt=57 bytes=508
+    1407.221 ms  dp-server: NET: OUT ACK         pkt=57 bytes=28 delay=9ms
+    1417.887 ms  dp-client: NET: IN  ACK         pkt=57 bytes=28
+    1417.966 ms  dp-client: NET: OUT DATA        pkt=58 bytes=508 delay=16ms
+    1438.029 ms  dp-server: NET: IN  DATA        pkt=58 bytes=508
+    1438.068 ms  dp-server: NET: OUT ACK         pkt=58 bytes=28 delay=5ms
+    1444.051 ms  dp-client: NET: IN  ACK         pkt=58 bytes=28
+    1444.135 ms  dp-client: NET: OUT DATA        pkt=59 bytes=508 delay=15ms
+    1463.005 ms  dp-server: NET: IN  DATA        pkt=59 bytes=508
+    1463.059 ms  dp-server: NET: OUT ACK         pkt=59 bytes=28 delay=3ms
+    1466.195 ms  dp-client: NET: IN  ACK         pkt=59 bytes=28
+    1466.239 ms  dp-client: NET: OUT DATA        pkt=60 bytes=508 delay=17ms
+    1484.832 ms  dp-server: NET: IN  DATA        pkt=60 bytes=508
+    1484.876 ms  dp-server: NET: OUT ACK         pkt=60 bytes=28 delay=16ms
+    1504.977 ms  dp-client: NET: IN  ACK         pkt=60 bytes=28
+    1505.027 ms  dp-client: NET: OUT DATA        pkt=61 bytes=508 delay=7ms
+    1513.885 ms  dp-server: NET: IN  DATA        pkt=61 bytes=508
+    1513.935 ms  dp-server: NET: OUT ACK         pkt=61 bytes=28 delay=13ms
+    1530.268 ms  dp-client: NET: IN  ACK         pkt=61 bytes=28
+    1530.311 ms  dp-client: NET: OUT DATA        pkt=62 bytes=508 delay=16ms
+    1549.324 ms  dp-server: NET: IN  DATA        pkt=62 bytes=508
+    1549.366 ms  dp-server: NET: OUT ACK         pkt=62 bytes=28 delay=10ms
+    1561.964 ms  dp-client: NET: IN  ACK         pkt=62 bytes=28
+    1562.028 ms  dp-client: NET: OUT DATA        pkt=63 bytes=508 delay=4ms
+    1567.110 ms  dp-server: NET: IN  DATA        pkt=63 bytes=508
+    1567.137 ms  dp-server: NET: OUT ACK         pkt=63 bytes=28
+    1567.179 ms  dp-client: NET: IN  ACK         pkt=63 bytes=28
+    1567.197 ms  dp-client: NET: OUT DATA        pkt=64 bytes=508 delay=10ms
+    1579.751 ms  dp-server: NET: IN  DATA        pkt=64 bytes=508
+    1579.780 ms  dp-server: NET: OUT ACK         pkt=64 bytes=28 delay=12ms
+    1594.844 ms  dp-client: NET: IN  ACK         pkt=64 bytes=28
+    1594.876 ms  dp-client: NET: OUT DATA        pkt=65 bytes=508 delay=11ms
+    1608.116 ms  dp-server: NET: IN  DATA        pkt=65 bytes=508
+    1608.187 ms  dp-server: NET: OUT ACK         pkt=65 bytes=28 delay=19ms
+    1631.757 ms  dp-client: NET: IN  ACK         pkt=65 bytes=28
+    1631.839 ms  dp-client: NET: OUT DATA        pkt=66 bytes=508 delay=18ms
+    1654.455 ms  dp-server: NET: IN  DATA        pkt=66 bytes=508
+    1654.525 ms  dp-server: NET: OUT ACK         pkt=66 bytes=28 delay=13ms
+    1669.163 ms  dp-client: NET: IN  ACK         pkt=66 bytes=28
+    1669.217 ms  dp-client: NET: OUT DATA        pkt=67 bytes=508
+    1669.320 ms  dp-server: NET: IN  DATA        pkt=67 bytes=508
+    1669.373 ms  dp-server: NET: OUT ACK         pkt=67 bytes=28 delay=12ms
+    1682.308 ms  dp-client: NET: IN  ACK         pkt=67 bytes=28
+    1682.357 ms  dp-client: NET: OUT DATA        pkt=68 bytes=508 delay=3ms
+    1686.213 ms  dp-server: NET: IN  DATA        pkt=68 bytes=508
+    1686.259 ms  dp-server: NET: OUT ACK         pkt=68 bytes=28 delay=7ms
+    1694.768 ms  dp-client: NET: IN  ACK         pkt=68 bytes=28
+    1694.820 ms  dp-client: NET: OUT DATA        pkt=69 bytes=508 delay=9ms
+    1706.172 ms  dp-server: NET: IN  DATA        pkt=69 bytes=508
+    1706.226 ms  dp-server: NET: OUT ACK         pkt=69 bytes=28 delay=14ms
+    1721.203 ms  dp-client: NET: IN  ACK         pkt=69 bytes=28
+    1721.250 ms  dp-client: NET: OUT DATA        pkt=70 bytes=508 delay=5ms
+    1727.598 ms  dp-server: NET: IN  DATA        pkt=70 bytes=508
+    1727.641 ms  dp-server: NET: OUT ACK         pkt=70 bytes=28 delay=2ms
+    1730.252 ms  dp-client: NET: IN  ACK         pkt=70 bytes=28
+    1730.293 ms  dp-client: NET: OUT DATA        pkt=71 bytes=508 delay=10ms
+    1742.877 ms  dp-server: NET: IN  DATA        pkt=71 bytes=508
+    1742.922 ms  dp-server: NET: OUT ACK         pkt=71 bytes=28 delay=1ms
+    1744.251 ms  dp-client: NET: IN  ACK         pkt=71 bytes=28
+    1744.275 ms  dp-client: NET: OUT DATA        pkt=72 bytes=508 delay=19ms
+    1768.092 ms  dp-server: NET: IN  DATA        pkt=72 bytes=508
+    1768.128 ms  dp-server: NET: OUT ACK         pkt=72 bytes=28 delay=12ms
+    1783.219 ms  dp-client: NET: IN  ACK         pkt=72 bytes=28
+    1783.266 ms  dp-client: NET: OUT DATA        pkt=73 bytes=508 delay=8ms
+    1793.359 ms  dp-server: NET: IN  DATA        pkt=73 bytes=508
+    1793.403 ms  dp-server: NET: OUT ACK         pkt=73 bytes=28 delay=12ms
+    1806.984 ms  dp-client: NET: IN  ACK         pkt=73 bytes=28
+    1807.040 ms  dp-client: NET: OUT DATA        pkt=74 bytes=508
+    1807.134 ms  dp-server: NET: IN  DATA        pkt=74 bytes=508
+    1807.173 ms  dp-server: NET: OUT ACK         pkt=74 bytes=28 delay=2ms
+    1809.818 ms  dp-client: NET: IN  ACK         pkt=74 bytes=28
+    1809.870 ms  dp-client: NET: OUT DATA        pkt=75 bytes=508 delay=7ms
+    1818.694 ms  dp-server: NET: IN  DATA        pkt=75 bytes=508
+    1818.726 ms  dp-server: NET: OUT ACK         pkt=75 bytes=28 delay=3ms
+    1822.572 ms  dp-client: NET: IN  ACK         pkt=75 bytes=28
+    1822.610 ms  dp-client: NET: OUT DATA        pkt=76 bytes=508 delay=13ms
+    1838.709 ms  dp-server: NET: IN  DATA        pkt=76 bytes=508
+    1838.751 ms  dp-server: NET: OUT ACK         pkt=76 bytes=28 delay=9ms
+    1850.099 ms  dp-client: NET: IN  ACK         pkt=76 bytes=28
+    1850.141 ms  dp-client: NET: OUT DATA        pkt=77 bytes=508 delay=17ms
+    1871.483 ms  dp-server: NET: IN  DATA        pkt=77 bytes=508
+    1871.534 ms  dp-server: NET: OUT ACK         pkt=77 bytes=28 delay=14ms
+    1889.103 ms  dp-client: NET: IN  ACK         pkt=77 bytes=28
+    1889.139 ms  dp-client: NET: OUT DATA        pkt=78 bytes=508 delay=9ms
+    1900.540 ms  dp-server: NET: IN  DATA        pkt=78 bytes=508
+    1900.606 ms  dp-server: NET: OUT ACK         pkt=78 bytes=28 delay=4ms
+    1905.358 ms  dp-client: NET: IN  ACK         pkt=78 bytes=28
+    1905.413 ms  dp-client: NET: OUT DATA        pkt=79 bytes=508 delay=14ms
+    1921.271 ms  dp-server: NET: IN  DATA        pkt=79 bytes=508
+    1921.333 ms  dp-server: NET: OUT ACK         pkt=79 bytes=28 delay=3ms
+    1925.213 ms  dp-client: NET: IN  ACK         pkt=79 bytes=28
+    1925.264 ms  dp-client: NET: OUT DATA        pkt=80 bytes=508 delay=9ms
+    1935.798 ms  dp-server: NET: IN  DATA        pkt=80 bytes=508
+    1935.823 ms  dp-server: NET: OUT ACK         pkt=80 bytes=28 delay=3ms
+    1939.666 ms  dp-client: NET: IN  ACK         pkt=80 bytes=28
+    1939.704 ms  dp-client: NET: OUT DATA        pkt=81 bytes=508 delay=10ms
+    1952.298 ms  dp-server: NET: IN  DATA        pkt=81 bytes=508
+    1952.342 ms  dp-server: NET: OUT ACK         pkt=81 bytes=28 delay=20ms
+    1977.428 ms  dp-client: NET: IN  ACK         pkt=81 bytes=28
+    1977.494 ms  dp-client: NET: OUT DATA        pkt=82 bytes=508 delay=8ms
+    1987.589 ms  dp-server: NET: IN  DATA        pkt=82 bytes=508
+    1987.630 ms  dp-server: NET: OUT ACK         pkt=82 bytes=28
+    1987.718 ms  dp-client: NET: IN  ACK         pkt=82 bytes=28
+    1987.752 ms  dp-client: NET: OUT DATA        pkt=83 bytes=508 delay=1ms
+    1989.098 ms  dp-server: NET: IN  DATA        pkt=83 bytes=508
+    1989.130 ms  dp-server: NET: OUT ACK         pkt=83 bytes=28 delay=20ms
+    2014.186 ms  dp-client: NET: IN  ACK         pkt=83 bytes=28
+    2014.232 ms  dp-client: NET: OUT DATA        pkt=84 bytes=508 delay=5ms
+    2020.589 ms  dp-server: NET: IN  DATA        pkt=84 bytes=508
+    2020.623 ms  dp-server: NET: OUT ACK         pkt=84 bytes=28 delay=11ms
+    2031.891 ms  dp-client: NET: IN  ACK         pkt=84 bytes=28
+    2031.926 ms  dp-client: NET: OUT DATA        pkt=85 bytes=508 delay=4ms
+    2037.056 ms  dp-server: NET: IN  DATA        pkt=85 bytes=508
+    2037.101 ms  dp-server: NET: OUT ACK         pkt=85 bytes=28 delay=14ms
+    2054.678 ms  dp-client: NET: IN  ACK         pkt=85 bytes=28
+    2054.720 ms  dp-client: NET: OUT DATA        pkt=86 bytes=508 delay=13ms
+    2071.050 ms  dp-server: NET: IN  DATA        pkt=86 bytes=508
+    2071.095 ms  dp-server: NET: OUT ACK         pkt=86 bytes=28 delay=17ms
+    2091.362 ms  dp-client: NET: IN  ACK         pkt=86 bytes=28
+    2091.413 ms  dp-client: NET: OUT DATA        pkt=87 bytes=508 delay=19ms
+    2114.704 ms  dp-server: NET: IN  DATA        pkt=87 bytes=508
+    2114.790 ms  dp-server: NET: OUT ACK         pkt=87 bytes=28 delay=1ms
+    2116.214 ms  dp-client: NET: IN  ACK         pkt=87 bytes=28
+    2116.278 ms  dp-client: NET: OUT DATA        pkt=88 bytes=508 delay=10ms
+    2128.926 ms  dp-server: NET: IN  DATA        pkt=88 bytes=508
+    2128.991 ms  dp-server: NET: OUT ACK         pkt=88 bytes=28 delay=8ms
+    2139.137 ms  dp-client: NET: IN  ACK         pkt=88 bytes=28
+    2139.187 ms  dp-client: NET: OUT DATA        pkt=89 bytes=508 delay=8ms
+    2147.855 ms  dp-server: NET: IN  DATA        pkt=89 bytes=508
+    2147.902 ms  dp-server: NET: OUT ACK         pkt=89 bytes=28 delay=13ms
+    2164.248 ms  dp-client: NET: IN  ACK         pkt=89 bytes=28
+    2164.291 ms  dp-client: NET: OUT DATA        pkt=90 bytes=508 delay=8ms
+    2173.502 ms  dp-server: NET: IN  DATA        pkt=90 bytes=508
+    2173.537 ms  dp-server: NET: OUT ACK         pkt=90 bytes=28 delay=1ms
+    2174.900 ms  dp-client: NET: IN  ACK         pkt=90 bytes=28
+    2174.932 ms  dp-client: NET: OUT DATA        pkt=91 bytes=508 delay=8ms
+    2183.766 ms  dp-server: NET: IN  DATA        pkt=91 bytes=508
+    2183.825 ms  dp-server: NET: OUT ACK         pkt=91 bytes=28 delay=3ms
+    2187.700 ms  dp-client: NET: IN  ACK         pkt=91 bytes=28
+    2187.740 ms  dp-client: NET: OUT DATA        pkt=92 bytes=508 delay=16ms
+    2207.925 ms  dp-server: NET: IN  DATA        pkt=92 bytes=508
+    2208.000 ms  dp-server: NET: OUT ACK         pkt=92 bytes=28 delay=4ms
+    2213.116 ms  dp-client: NET: IN  ACK         pkt=92 bytes=28
+    2213.157 ms  dp-client: NET: OUT DATA        pkt=93 bytes=508 delay=15ms
+    2231.511 ms  dp-server: NET: IN  DATA        pkt=93 bytes=508
+    2231.555 ms  dp-server: NET: OUT ACK         pkt=93 bytes=28 delay=4ms
+    2236.728 ms  dp-client: NET: IN  ACK         pkt=93 bytes=28
+    2236.783 ms  dp-client: NET: OUT DATA        pkt=94 bytes=508 delay=18ms
+    2256.450 ms  dp-server: NET: IN  DATA        pkt=94 bytes=508
+    2256.533 ms  dp-server: NET: OUT ACK         pkt=94 bytes=28 delay=7ms
+    2263.690 ms  dp-client: NET: IN  ACK         pkt=94 bytes=28
+    2263.732 ms  dp-client: NET: OUT DATA        pkt=95 bytes=508 delay=6ms
+    2271.357 ms  dp-server: NET: IN  DATA        pkt=95 bytes=508
+    2271.407 ms  dp-server: NET: OUT ACK         pkt=95 bytes=28 delay=9ms
+    2282.782 ms  dp-client: NET: IN  ACK         pkt=95 bytes=28
+    2282.841 ms  dp-client: NET: OUT DATA        pkt=96 bytes=508 delay=1ms
+    2284.209 ms  dp-server: NET: IN  DATA        pkt=96 bytes=508
+    2284.250 ms  dp-server: NET: OUT ACK         pkt=96 bytes=28 delay=20ms
+    2306.259 ms  dp-client: NET: IN  ACK         pkt=96 bytes=28
+    2306.306 ms  dp-client: NET: OUT DATA        pkt=97 bytes=508 delay=11ms
+    2318.534 ms  dp-server: NET: IN  DATA        pkt=97 bytes=508
+    2318.579 ms  dp-server: NET: OUT ACK         pkt=97 bytes=28 delay=4ms
+    2323.675 ms  dp-client: NET: IN  ACK         pkt=97 bytes=28
+    2323.715 ms  dp-client: NET: OUT DATA        pkt=98 bytes=508
+    2323.801 ms  dp-server: NET: IN  DATA        pkt=98 bytes=508
+    2323.833 ms  dp-server: NET: OUT ACK         pkt=98 bytes=28 delay=10ms
+    2336.407 ms  dp-client: NET: IN  ACK         pkt=98 bytes=28
+    2336.443 ms  dp-client: NET: OUT DATA        pkt=99 bytes=508 delay=16ms
+    2356.517 ms  dp-server: NET: IN  DATA        pkt=99 bytes=508
+    2356.551 ms  dp-server: NET: OUT ACK         pkt=99 bytes=28
+    2356.642 ms  dp-client: NET: IN  ACK         pkt=99 bytes=28
+    2356.677 ms  dp-client: NET: OUT DATA        pkt=100 bytes=508 delay=20ms
+    2381.750 ms  dp-server: NET: IN  DATA        pkt=100 bytes=508
+    2381.791 ms  dp-server: NET: OUT ACK         pkt=100 bytes=28 delay=10ms
+    2394.372 ms  dp-client: NET: IN  ACK         pkt=100 bytes=28
+    2394.406 ms  dp-client: NET: OUT DATA        pkt=101 bytes=508 delay=20ms
+    2415.359 ms  dp-server: NET: IN  DATA        pkt=101 bytes=508
+    2415.402 ms  dp-server: NET: OUT ACK         pkt=101 bytes=28 delay=5ms
+    2421.744 ms  dp-client: NET: IN  ACK         pkt=101 bytes=28
+    2421.781 ms  dp-client: NET: OUT DATA        pkt=102 bytes=508 delay=1ms
+    2423.132 ms  dp-server: NET: IN  DATA        pkt=102 bytes=508
+    2423.170 ms  dp-server: NET: OUT ACK         pkt=102 bytes=28 delay=6ms
+    2430.749 ms  dp-client: NET: IN  ACK         pkt=102 bytes=28
+    2430.787 ms  dp-client: NET: OUT DATA        pkt=103 bytes=508 delay=17ms
+    2452.095 ms  dp-server: NET: IN  DATA        pkt=103 bytes=508
+    2452.143 ms  dp-server: NET: OUT ACK         pkt=103 bytes=28 delay=16ms
+    2472.069 ms  dp-client: NET: IN  ACK         pkt=103 bytes=28
+    2472.116 ms  dp-client: NET: OUT DATA        pkt=104 bytes=508 delay=20ms
+    2497.179 ms  dp-server: NET: IN  DATA        pkt=104 bytes=508
+    2497.225 ms  dp-server: NET: OUT ACK         pkt=104 bytes=28 delay=4ms
+    2502.330 ms  dp-client: NET: IN  ACK         pkt=104 bytes=28
+    2502.371 ms  dp-client: NET: OUT DATA        pkt=105 bytes=508 delay=13ms
+    2516.106 ms  dp-server: NET: IN  DATA        pkt=105 bytes=508
+    2516.147 ms  dp-server: NET: OUT ACK         pkt=105 bytes=28 delay=14ms
+    2533.451 ms  dp-client: NET: IN  ACK         pkt=105 bytes=28
+    2533.495 ms  dp-client: NET: OUT DATA        pkt=106 bytes=508 delay=13ms
+    2549.145 ms  dp-server: NET: IN  DATA        pkt=106 bytes=508
+    2549.200 ms  dp-server: NET: OUT ACK         pkt=106 bytes=28 delay=4ms
+    2554.302 ms  dp-client: NET: IN  ACK         pkt=106 bytes=28
+    2554.343 ms  dp-client: NET: OUT DATA        pkt=107 bytes=508 delay=1ms
+    2555.611 ms  dp-server: NET: IN  DATA        pkt=107 bytes=508
+    2555.650 ms  dp-server: NET: OUT ACK         pkt=107 bytes=28 delay=15ms
+    2574.509 ms  dp-client: NET: IN  ACK         pkt=107 bytes=28
+    2574.559 ms  dp-client: NET: OUT DATA        pkt=108 bytes=508 delay=6ms
+    2582.181 ms  dp-server: NET: IN  DATA        pkt=108 bytes=508
+    2582.231 ms  dp-server: NET: OUT ACK         pkt=108 bytes=28 delay=11ms
+    2594.203 ms  dp-client: NET: IN  ACK         pkt=108 bytes=28
+    2594.278 ms  dp-client: NET: OUT DATA        pkt=109 bytes=508 delay=17ms
+    2615.744 ms  dp-server: NET: IN  DATA        pkt=109 bytes=508
+    2615.847 ms  dp-server: NET: OUT ACK         pkt=109 bytes=28 delay=4ms
+    2621.006 ms  dp-client: NET: IN  ACK         pkt=109 bytes=28
+    2621.068 ms  dp-client: NET: OUT DATA        pkt=110 bytes=508 delay=15ms
+    2636.656 ms  dp-server: NET: IN  DATA        pkt=110 bytes=508
+    2636.695 ms  dp-server: NET: OUT ACK         pkt=110 bytes=28 delay=12ms
+    2650.906 ms  dp-client: NET: IN  ACK         pkt=110 bytes=28
+    2650.999 ms  dp-client: NET: OUT DATA        pkt=111 bytes=508 delay=12ms
+    2666.040 ms  dp-server: NET: IN  DATA        pkt=111 bytes=508
+    2666.087 ms  dp-server: NET: OUT ACK         pkt=111 bytes=28 delay=17ms
+    2687.223 ms  dp-client: NET: IN  ACK         pkt=111 bytes=28
+    2687.283 ms  dp-client: NET: OUT DATA        pkt=112 bytes=508 delay=9ms
+    2698.643 ms  dp-server: NET: IN  DATA        pkt=112 bytes=508
+    2698.684 ms  dp-server: NET: OUT ACK         pkt=112 bytes=28 delay=8ms
+    2708.479 ms  dp-client: NET: IN  ACK         pkt=112 bytes=28
+    2708.526 ms  dp-client: NET: OUT DATA        pkt=113 bytes=508 delay=19ms
+    2729.192 ms  dp-server: NET: IN  DATA        pkt=113 bytes=508
+    2729.237 ms  dp-server: NET: OUT ACK         pkt=113 bytes=28 delay=4ms
+    2734.362 ms  dp-client: NET: IN  ACK         pkt=113 bytes=28
+    2734.421 ms  dp-client: NET: OUT DATA        pkt=114 bytes=508 delay=4ms
+    2738.519 ms  dp-server: NET: IN  DATA        pkt=114 bytes=508
+    2738.555 ms  dp-server: NET: OUT ACK         pkt=114 bytes=28 delay=17ms
+    2759.755 ms  dp-client: NET: IN  ACK         pkt=114 bytes=28
+    2759.788 ms  dp-client: NET: OUT DATA        pkt=115 bytes=508 delay=10ms
+    2771.370 ms  dp-server: NET: IN  DATA        pkt=115 bytes=508
+    2771.407 ms  dp-server: NET: OUT ACK         pkt=115 bytes=28 delay=13ms
+    2787.743 ms  dp-client: NET: IN  ACK         pkt=115 bytes=28
+    2787.784 ms  dp-client: NET: OUT DATA        pkt=116 bytes=508 delay=3ms
+    2791.623 ms  dp-server: NET: IN  DATA        pkt=116 bytes=508
+    2791.656 ms  dp-server: NET: OUT ACK         pkt=116 bytes=28
+    2791.734 ms  dp-client: NET: IN  ACK         pkt=116 bytes=28
+    2791.766 ms  dp-client: NET: OUT DATA        pkt=117 bytes=508 delay=17ms
+    2809.635 ms  dp-server: NET: IN  DATA        pkt=117 bytes=508
+    2809.668 ms  dp-server: NET: OUT ACK         pkt=117 bytes=28 delay=7ms
+    2818.502 ms  dp-client: NET: IN  ACK         pkt=117 bytes=28
+    2818.535 ms  dp-client: NET: OUT DATA        pkt=118 bytes=508 delay=4ms
+    2823.618 ms  dp-server: NET: IN  DATA        pkt=118 bytes=508
+    2823.648 ms  dp-server: NET: OUT ACK         pkt=118 bytes=28 delay=6ms
+    2831.231 ms  dp-client: NET: IN  ACK         pkt=118 bytes=28
+    2831.262 ms  dp-client: NET: OUT DATA        pkt=119 bytes=508 delay=2ms
+    2833.852 ms  dp-server: NET: IN  DATA        pkt=119 bytes=508
+    2833.884 ms  dp-server: NET: OUT ACK         pkt=119 bytes=28 delay=13ms
+    2850.248 ms  dp-client: NET: IN  ACK         pkt=119 bytes=28
+    2850.286 ms  dp-client: NET: OUT DATA        pkt=120 bytes=508 delay=4ms
+    2854.502 ms  dp-server: NET: IN  DATA        pkt=120 bytes=508
+    2854.541 ms  dp-server: NET: OUT ACK         pkt=120 bytes=28 delay=8ms
+    2864.623 ms  dp-client: NET: IN  ACK         pkt=120 bytes=28
+    2864.657 ms  dp-client: NET: OUT DATA        pkt=121 bytes=508 delay=3ms
+    2868.499 ms  dp-server: NET: IN  DATA        pkt=121 bytes=508
+    2868.537 ms  dp-server: NET: OUT ACK         pkt=121 bytes=28 delay=2ms
+    2871.123 ms  dp-client: NET: IN  ACK         pkt=121 bytes=28
+    2871.157 ms  dp-client: NET: OUT DATA        pkt=122 bytes=508 delay=6ms
+    2878.756 ms  dp-server: NET: IN  DATA        pkt=122 bytes=508
+    2878.799 ms  dp-server: NET: OUT ACK         pkt=122 bytes=28 delay=17ms
+    2900.119 ms  dp-client: NET: IN  ACK         pkt=122 bytes=28
+    2900.163 ms  dp-client: NET: OUT DATA        pkt=123 bytes=508 delay=1ms
+    2901.508 ms  dp-server: NET: IN  DATA        pkt=123 bytes=508
+    2901.548 ms  dp-server: NET: OUT ACK         pkt=123 bytes=28 delay=5ms
+    2907.880 ms  dp-client: NET: IN  ACK         pkt=123 bytes=28
+    2907.913 ms  dp-client: NET: OUT DATA        pkt=124 bytes=508 delay=12ms
+    2922.978 ms  dp-server: NET: IN  DATA        pkt=124 bytes=508
+    2923.014 ms  dp-server: NET: OUT ACK         pkt=124 bytes=28
+    2923.099 ms  dp-client: NET: IN  ACK         pkt=124 bytes=28
+    2923.133 ms  dp-client: NET: OUT DATA        pkt=125 bytes=508 delay=3ms
+    2926.970 ms  dp-server: NET: IN  DATA        pkt=125 bytes=508
+    2927.004 ms  dp-server: NET: OUT ACK         pkt=125 bytes=28 delay=15ms
+    2942.659 ms  dp-client: NET: IN  ACK         pkt=125 bytes=28
+    2942.693 ms  dp-client: NET: OUT DATA        pkt=126 bytes=508 delay=16ms
+    2962.746 ms  dp-server: NET: IN  DATA        pkt=126 bytes=508
+    2962.780 ms  dp-server: NET: OUT ACK         pkt=126 bytes=28 delay=8ms
+    2972.867 ms  dp-client: NET: IN  ACK         pkt=126 bytes=28
+    2972.901 ms  dp-client: NET: OUT DATA        pkt=127 bytes=508 delay=10ms
+    2985.481 ms  dp-server: NET: IN  DATA        pkt=127 bytes=508
+    2985.522 ms  dp-server: NET: OUT ACK         pkt=127 bytes=28 delay=3ms
+    2989.363 ms  dp-client: NET: IN  ACK         pkt=127 bytes=28
+    2989.398 ms  dp-client: NET: OUT DATA        pkt=128 bytes=508 delay=2ms
+    2991.991 ms  dp-server: NET: IN  DATA        pkt=128 bytes=508
+    2992.023 ms  dp-server: NET: OUT ACK         pkt=128 bytes=28 delay=10ms
+    3004.162 ms  dp-client: NET: IN  ACK         pkt=128 bytes=28
+    3004.211 ms  dp-client: NET: OUT DATA        pkt=129 bytes=508 delay=3ms
+    3008.056 ms  dp-server: NET: IN  DATA        pkt=129 bytes=508
+    3008.093 ms  dp-server: NET: OUT ACK         pkt=129 bytes=28 delay=17ms
+    3029.111 ms  dp-client: NET: IN  ACK         pkt=129 bytes=28
+    3029.157 ms  dp-client: NET: OUT DATA        pkt=130 bytes=508 delay=14ms
+    3046.174 ms  dp-server: NET: IN  DATA        pkt=130 bytes=508
+    3046.218 ms  dp-server: NET: OUT ACK         pkt=130 bytes=28 delay=1ms
+    3047.571 ms  dp-client: NET: IN  ACK         pkt=130 bytes=28
+    3047.607 ms  dp-client: NET: OUT DATA        pkt=131 bytes=508 delay=9ms
+    3058.943 ms  dp-server: NET: IN  DATA        pkt=131 bytes=508
+    3058.979 ms  dp-server: NET: OUT ACK         pkt=131 bytes=28 delay=18ms
+    3081.543 ms  dp-client: NET: IN  ACK         pkt=131 bytes=28
+    3081.586 ms  dp-client: NET: OUT DATA        pkt=132 bytes=508 delay=6ms
+    3088.603 ms  dp-server: NET: IN  DATA        pkt=132 bytes=508
+    3088.640 ms  dp-server: NET: OUT ACK         pkt=132 bytes=28 delay=2ms
+    3091.234 ms  dp-client: NET: IN  ACK         pkt=132 bytes=28
+    3091.269 ms  dp-client: NET: OUT DATA        pkt=133 bytes=508 delay=13ms
+    3107.565 ms  dp-server: NET: IN  DATA        pkt=133 bytes=508
+    3107.594 ms  dp-server: NET: OUT ACK         pkt=133 bytes=28 delay=14ms
+    3124.782 ms  dp-client: NET: IN  ACK         pkt=133 bytes=28
+    3124.846 ms  dp-client: NET: OUT DATA        pkt=134 bytes=508
+    3124.911 ms  dp-server: NET: IN  DATA        pkt=134 bytes=508
+    3124.940 ms  dp-server: NET: OUT ACK         pkt=134 bytes=28 delay=15ms
+    3143.817 ms  dp-client: NET: IN  ACK         pkt=134 bytes=28
+    3143.890 ms  dp-client: NET: OUT DATA        pkt=135 bytes=508 delay=18ms
+    3166.472 ms  dp-server: NET: IN  DATA        pkt=135 bytes=508
+    3166.590 ms  dp-server: NET: OUT ACK         pkt=135 bytes=28 delay=7ms
+    3175.469 ms  dp-client: NET: IN  ACK         pkt=135 bytes=28
+    3175.513 ms  dp-client: NET: OUT DATA        pkt=136 bytes=508 delay=19ms
+    3198.099 ms  dp-server: NET: IN  DATA        pkt=136 bytes=508
+    3198.145 ms  dp-server: NET: OUT ACK         pkt=136 bytes=28 delay=3ms
+    3202.004 ms  dp-client: NET: IN  ACK         pkt=136 bytes=28
+    3202.046 ms  dp-client: NET: OUT DATA        pkt=137 bytes=284 delay=14ms
+    3219.430 ms  dp-server: NET: IN  DATA        pkt=137 bytes=284
+    3219.522 ms  dp-server: NET: OUT ACK         pkt=137 bytes=28 delay=7ms
+    3228.412 ms  dp-client: NET: IN  ACK         pkt=137 bytes=28
+    3228.484 ms  dp-client: NET: OUT CLOSE       pkt=138 bytes=28 delay=5ms
+    3233.883 ms  dp-server: NET: IN  CLOSE       pkt=138 bytes=28
+    3233.934 ms  dp-server: NET: OUT CLOSE_ACK   pkt=138 bytes=28 delay=6ms
+    3241.551 ms  dp-client: NET: IN  CLOSE_ACK   pkt=138 bytes=28

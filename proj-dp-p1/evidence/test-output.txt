@@ -1,0 +1,19 @@
+test: clean (1024 KB)
+test: clean PASS
+
+test: loss10 (64 KB)
+test: loss10 PASS
+
+test: delay20 (64 KB)
+test: delay20 PASS
+
+test: both20 (64 KB)
+test: both20 PASS
+
+test: loss50 (8 KB)
+test: loss50 PASS
+
+test: slowack (8 KB)
+test: slowack PASS
+
+test: all reference tests PASS

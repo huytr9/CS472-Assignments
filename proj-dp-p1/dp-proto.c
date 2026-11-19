@@ -410,7 +410,7 @@ int dp_connect(dp_connection_t *conn) {
       }
     }
     if (retry == conn->max_retries) return -2;
-    // keep the same connection id when trying again.
+    // keep the same connection id when trying again
     log_net_event(conn, "TIMEOUT", &request, "retransmitting");
   }
   return -2;
@@ -442,7 +442,7 @@ static int send_data_packet(dp_connection_t *conn, const dp_packet_t *packet) {
       if (status == 0) break;
       if (reply.type == DP_ACK && reply.connection_id == conn->connection_id &&
           reply.packet_number == packet->packet_number) return 0;
-      // an old ack does not restart the wait or use up a retry.
+      // an old ack does not restart the wait or use up a retry
     }
     if (retry == conn->max_retries) return -2;
     log_net_event(conn, "TIMEOUT", packet, "retransmitting");
@@ -531,7 +531,7 @@ int dp_recv(dp_connection_t *conn, void *buffer, size_t capacity, size_t *out_le
     }
     if (packet.type != DP_DATA) continue;
     if (packet.packet_number < conn->recv_next_packet) {
-      // the data was already copied, but its ack may not have arrived.
+      // the data was already copied, but its ack may not have arrived
       log_net_event(conn, "DUP", &packet, "already delivered, re-ACK");
       if (send_ack(conn, packet.packet_number) < 0) return -1;
       continue;
@@ -549,7 +549,7 @@ int dp_recv(dp_connection_t *conn, void *buffer, size_t capacity, size_t *out_le
     int finished = end == message_length;
     if (finished != ((packet.flags & DP_FLAG_FIN) != 0)) return -4;
     if (!finished && packet.payload_length == 0) return -4;
-    // only acknowledge bytes after checking and accepting them.
+    // only acknowledge bytes after checking and accepting them
     memcpy((uint8_t *)buffer + received, packet.payload, packet.payload_length);
     received = end;
     conn->recv_next_packet++;
