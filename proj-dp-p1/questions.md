@@ -1,11 +1,15 @@
 # dp Project, Part 1: Interpretation Questions
 
-**Name:**
-**Drexel ID:**
+**Name:** Beckham Truong
+**Drexel ID:** bt592
 **Parameters** (paste the output of `./params.sh <your-id>`):
 
 ```text
-
+DREXEL_ID=bt592
+DATA_DROP=31
+ACK_DROP=25
+SIZE_KB=72
+DELAY=20
 ```
 
 ## Ground rules
@@ -35,6 +39,14 @@ grep -v NET evidence/client-p-delay.txt            # status lines only
 4. Your `p-delay` run sends `SIZE_KB` KB with a random delay of 0 to `DELAY` ms on every packet in each direction. Estimate how long the transfer will take. Show your arithmetic.
 
 *Your prediction:*
+
+1. Packet 31 will be dropped before it reaches the server. The client will wait about 250 ms, then send packet 31 again with the same number and offset. The server will accept it, send ACK 31, and the client can send packet 32. I do not expect a DUP here because the server never received the first copy.
+
+2. The server will receive packet 25 and copy its bytes, but ACK 25 will be dropped. The client will time out and resend packet 25. This time the server should log a DUP, leave the message unchanged, and send ACK 25 again. After receiving it, the client can send packet 26.
+
+3. The transport should see the same thing in both runs: a send succeeds, no matching ACK arrives before the deadline, the packet is resent, and then an ACK arrives. It cannot tell which direction lost a packet. The simulator logs can show us the difference, but the transport does not get that information.
+
+4. The message is 72 × 1024 = 73,728 bytes. With up to 480 bytes per packet, that takes ceil(73,728 / 480) = 154 DATA packets. Each direction has an average delay of 20 / 2 = 10 ms, so I estimate 154 × (10 + 10) = 3,080 ms, or about 3.08 seconds for the data transfer. Actual timing could be higher because the programs also need time to run and the operating system has to schedule their sleeps.
 
 ---
 
